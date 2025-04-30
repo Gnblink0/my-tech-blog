@@ -166,7 +166,7 @@
       
       <div class="project-image">
         <img
-          src="https://picture-guan.oss-cn-hangzhou.aliyuncs.com/ChatGPT%20Image%20Apr%2029,%202025,%2001_54_35%20AM.jpeg"
+          src="/image/tomatch_banner.jpeg"
           alt="Tomatch"
           class="w-full h-full object-cover"
         />
@@ -272,6 +272,7 @@
     color: white;
     font-size: 3rem;
     font-weight: bold;
+    margin-top: 2rem;
     margin-bottom: 1rem;
     transform: translateY(1rem);
     transition: transform 0.3s ease-in-out;
@@ -381,6 +382,43 @@
 
   .project-overlay::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.4);
+  }
+
+  @media only screen and (max-width: 768px) {
+    .project-overlay {
+      padding: 1rem;
+    }
+
+    .project-title {
+      font-size: 2rem;
+      margin-top: 1rem;
+      margin-bottom: 0rem;
+    }
+
+    .project-description {
+      font-size: 1.2rem;
+      margin-top: 0.3rem;
+    }
+
+    .project-highlights {
+      font-size: 1.1rem;
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-highlights li {
+      margin-bottom: 0.5rem;
+    }
+
+    .project-tag {
+      font-size: 1rem;
+      padding: 0.25rem 0.75rem;
+    }
+
+    .github-icon {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 </style>
 

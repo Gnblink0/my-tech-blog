@@ -4,7 +4,7 @@ layout: "projects"
 projects:
   - title: "Tomatch"
     description: "AI-powered grocery price tracking and trend analysis mobile app for smarter shopping decisions. Built with React Native, TypeScript, Firebase, and AI APIs, this app features smart receipt scanning, price tracking, and location-based store comparison."
-    image: "https://picture-guan.oss-cn-hangzhou.aliyuncs.com/ChatGPT%20Image%20Apr%2029,%202025,%2001_54_35%20AM.jpeg"
+    image: "/image/tomatch_banner.jpeg"
     tags: ["React Native", "TypeScript", "Firebase", "OpenAI API", "Google API"]
     links:
       github: "https://github.com/the-tomato-king/Tomatch"
