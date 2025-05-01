@@ -69,6 +69,18 @@
                 href="http://localhost:1313/zh/categories/"
                 />
   </url><url>
+    <loc>http://localhost:1313/zh/projects/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/projects/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="http://localhost:1313/zh/projects/"
+                />
+  </url><url>
     <loc>http://localhost:1313/zh/series/</loc>
     <xhtml:link
                 rel="alternate"
