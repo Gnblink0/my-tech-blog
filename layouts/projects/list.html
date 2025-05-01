@@ -9,7 +9,10 @@
     {{ range .Params.projects }}
     <div class="project-card">
       <!-- Image Container -->
-      <div class="project-image">
+      <div
+        class="project-image"
+        onclick="this.querySelector('.project-overlay').classList.toggle('show-overlay')"
+      >
         <img
           src="{{ .image }}"
           alt="{{ .title }}"
@@ -33,8 +36,8 @@
             <span class="project-tag">{{ . }}</span>
             {{ end }}
           </div>
-          {{ with .links.github }}
           <div class="project-links">
+            {{ with .links.github }}
             <a
               href="{{ . }}"
               target="_blank"
@@ -49,8 +52,21 @@
                 />
               </svg>
             </a>
+            {{ end }} {{ with .links.youtube }}
+            <a
+              href="{{ . }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-link"
+            >
+              <svg class="youtube-icon" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                />
+              </svg>
+            </a>
+            {{ end }}
           </div>
-          {{ end }}
         </div>
       </div>
     </div>
@@ -73,10 +89,14 @@
 
   .project-image {
     position: relative;
-    aspect-ratio: 16/9;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
   }
 
   .project-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -196,7 +216,11 @@
     height: 2.5rem;
   }
 
-  /* 添加滚动条样式 */
+  .youtube-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
   .project-overlay::-webkit-scrollbar {
     width: 6px;
   }
@@ -215,7 +239,31 @@
     background: rgba(255, 255, 255, 0.4);
   }
 
+  .project-overlay.show-overlay {
+    opacity: 1;
+  }
+
+  @media only screen and (min-width: 769px) {
+    /* 桌面端：只使用hover */
+    .project-overlay.show-overlay {
+      opacity: 0; /* 禁用click效果 */
+    }
+  }
+
   @media only screen and (max-width: 768px) {
+    /* 移动端：只使用click */
+    .project-card:hover .project-overlay {
+      opacity: 0; /* 禁用hover效果 */
+    }
+
+    /* 移动端：动画效果跟随show-overlay类 */
+    .project-overlay.show-overlay .project-title,
+    .project-overlay.show-overlay .project-description,
+    .project-overlay.show-overlay .project-tags,
+    .project-overlay.show-overlay .project-links {
+      transform: translateY(0);
+    }
+
     .project-overlay {
       padding: 1rem;
     }
@@ -229,16 +277,11 @@
     .project-description {
       font-size: 1.2rem;
       margin-top: 0.3rem;
+      margin-bottom: 1.2rem;
     }
 
     .project-highlights {
-      font-size: 1.1rem;
-      margin-top: 0.3rem;
-      margin-bottom: 1rem;
-    }
-
-    .project-highlights li {
-      margin-bottom: 0.5rem;
+      display: none; /* hide highlights on mobile */
     }
 
     .project-tag {
@@ -249,6 +292,19 @@
     .github-icon {
       width: 2rem;
       height: 2rem;
+    }
+
+    .youtube-icon {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 0;
+    }
+
+    .project-overlay.show-overlay {
+      opacity: 1;
     }
   }
 </style>
