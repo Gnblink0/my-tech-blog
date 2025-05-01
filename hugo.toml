@@ -1,4 +1,4 @@
-baseurl = "https://www.gnblilnk.dev/"
+baseURL = "https://www.gnblilnk.dev/"
 title = "👾 Gina's Tech Blog"
 theme = "hugo-coder"
 languagecode = "en"
@@ -27,7 +27,7 @@ style = "github-dark"
   favicon_32 = "/img/favicon-32x32.png"
   favicon_16 = "/img/favicon-16x16.png"
 
-  since = 2024
+ # since = 2024
 
   enableTwemoji = true
 
