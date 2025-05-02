@@ -1,7 +1,7 @@
 <nav class="navigation">
   <section class="container">
     {{ with .Site }}
-    <a class="navigation-title" href="{{ .BaseURL | relURL "" }}">
+    <a class="navigation-title" href="{{ .BaseURL | relURL }}">
       {{ .Title }}
     </a>
     {{ end }}
