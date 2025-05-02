@@ -2,100 +2,127 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:60415/about/</loc>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-01-20T20:30:09-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:60415/zh/about/"
+                href="http://localhost:1313/zh/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:60415/about/"
+                href="http://localhost:1313/"
                 />
   </url><url>
-    <loc>http://localhost:60415/contact/</loc>
+    <loc>http://localhost:1313/posts/my-first-post/</loc>
+    <lastmod>2025-01-20T20:30:09-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:60415/zh/contact/"
+                href="http://localhost:1313/zh/posts/my-first-post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:60415/contact/"
+                href="http://localhost:1313/posts/my-first-post/"
                 />
   </url><url>
-    <loc>http://localhost:60415/</loc>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-01-20T20:30:09-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:60415/zh/"
+                href="http://localhost:1313/zh/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:60415/"
+                href="http://localhost:1313/posts/"
                 />
   </url><url>
-    <loc>http://localhost:60415/authors/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:60415/zh/authors/"
+                href="http://localhost:1313/zh/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:60415/authors/"
+                href="http://localhost:1313/about/"
                 />
   </url><url>
-    <loc>http://localhost:60415/categories/</loc>
+    <loc>http://localhost:1313/contact/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:60415/zh/categories/"
+                href="http://localhost:1313/zh/contact/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:60415/categories/"
+                href="http://localhost:1313/contact/"
                 />
   </url><url>
-    <loc>http://localhost:60415/projects/</loc>
+    <loc>http://localhost:1313/authors/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:60415/zh/projects/"
+                href="http://localhost:1313/zh/authors/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:60415/projects/"
+                href="http://localhost:1313/authors/"
                 />
   </url><url>
-    <loc>http://localhost:60415/series/</loc>
+    <loc>http://localhost:1313/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:60415/zh/series/"
+                href="http://localhost:1313/zh/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:60415/series/"
+                href="http://localhost:1313/categories/"
                 />
   </url><url>
-    <loc>http://localhost:60415/tags/</loc>
+    <loc>http://localhost:1313/projects/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="http://localhost:60415/zh/tags/"
+                href="http://localhost:1313/zh/projects/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:60415/tags/"
+                href="http://localhost:1313/projects/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/series/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="http://localhost:1313/zh/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/series/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="http://localhost:1313/zh/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/tags/"
                 />
   </url>
 </urlset>
