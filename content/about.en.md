@@ -19,9 +19,8 @@ I spent years studying how people think, read, and connect as a history major ba
 ### _looking ahead, I'd like to_
 
 - finish and publicly launch Tomatch on App Store / Play Store
-- explore monetization, maybe accidentally build a real business
 - become that person who actually blogs regularly, not just sets up the layout
 
 
-Thanks for visiting.
+Thanks for visiting :)  
 
