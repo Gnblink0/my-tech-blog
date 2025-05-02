@@ -2,7 +2,7 @@
 
 date = '2025-01-20T20:30:09-08:00'
 
-title = 'Github的总体工作流程'
+title = '基于 Github Flow 的 Git 总体工作流程'
 
 +++
 ## Why Git?
@@ -23,7 +23,6 @@ What a superpower!
 ![Github Flow与其他 Github 常见工作流的区别](https://picture-guan.oss-cn-hangzhou.aliyuncs.com/20250502154844.png)
 
 
-
 虽然我在这之前也接触过 GitHub，自学过一些命令和原理，也写过一些 side projects，但这是我第一次在**真实的多人开发中，从头到尾、系统而规范地使用 Git**。这一过程也让我真正体会到版本控制不仅是工具，更是一种思维方式：它帮助我们记录、协作、追踪、理解整个项目的演进轨迹。现在回头看，我能明显感觉到自己在开发习惯上的成熟 —— 不再是临时查命令、随手操作，而是建立起了“Git-first”的工作流程意识。
 
 我当时也已经习惯用卡片笔记法（zettelkasten）整理我在 CS 中学习到的概念和方法，关于 git 的这一张卡片一直是我最常打开 check 的一张。后来另一门课也有一个 team project，其中一个队友不太熟悉 Git，我干脆把那张卡片导出成 PDF 发给了她作为“入门手册”。
@@ -38,17 +37,15 @@ What a superpower!
 - 已经在 shell 里以 ssh 连接了 GitHub 账号
 - 已经用 GitHub 进行过一些 add, commit, push 的操作
 
-但仍然对实际开发中的 GitHub 使用流程感到模糊： —— this article is written for you!
+但仍然对实际开发中的 GitHub 使用流程感到模糊 —— this article is written for you!
 
 ## Let's Git
 
-我会先列出总体的流程，其中包含 6 个大的阶段，然后分章具体解释每一个大阶段内部应该做什么
+我会先列出总体的流程，其中包含 6 个大的阶段，然后再分章具体解释每一个大阶段内部应该做什么。
 
-这样不仅一目了然，
+### 总体流程
 
-### 
-
-1. 创建并且链接本地文件夹和远程的仓库，见[[#创建 Repository]]
+1. 创建并且链接本地文件夹和远程的仓库，见 [Github的总体工作流程](https://www.gnblilnk.dev/posts/my-first-post/#%e5%88%9b%e5%bb%ba-repository-%e5%b9%b6%e4%b8%94%e8%bf%9e%e6%8e%a5%e6%9c%ac%e5%9c%b0%e5%92%8c%e8%bf%9c%e7%a8%8b)
 2. 保证本地和远程的文件同步一致
 	- 如果远程是最新的，Pull 远程的内容到本地 [[#Pull]]
 	- 如果本地是最新的，ACP，见[[#保存修改和推送到远程 (Develop and Add, commit, push)]]

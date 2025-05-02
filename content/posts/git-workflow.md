@@ -2,7 +2,7 @@
 
 date = '2025-01-20T20:30:09-08:00'
 
-title = 'Github的总体工作流程'
+title = 'The Overall Git Workflow Based on Github Flow'
 
 +++
 ## Why Git?
