@@ -38,6 +38,8 @@ style = "github-dark"
   # customSCSS = ["scss/custom.scss"]
   customJS = []
 
+  homeURL = "https://www.gnblilnk.dev/"
+
 [taxonomies]
   category = "categories"
   series = "series"
