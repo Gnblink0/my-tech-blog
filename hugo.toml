@@ -77,8 +77,10 @@ style = "github-dark"
     languageName = "🇨🇦"
     weight = 1
     title = "👾 Gina's Tech Blog"
-    description = "A tech blog by Gina Xu on Web & Mobile development"
-    keywords = "blog, developer, web, mobile, tech"
+    
+    [languages.en.params]
+      description = "A tech blog by Gina Xu on Web & Mobile development"
+      keywords = "blog, developer, web, mobile, tech"
   
     [[languages.en.menu.main]]
       name = "About"
@@ -104,8 +106,10 @@ style = "github-dark"
     languageName = ":cn:"
     weight = 2
     title = "👾 Gina的技术博客"
-    description = "Gina Xu的Web与移动开发技术博客"
-    keywords = "博客, 开发者, Web, 移动, 技术"
+    
+    [languages.zh.params]
+      description = "Gina Xu的Web与移动开发技术博客"
+      keywords = "博客, 开发者, Web, 移动, 技术"
 
     [[languages.zh.menu.main]]
       name = "关于"
