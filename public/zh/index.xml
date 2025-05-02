@@ -1,94 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>👾 Gina的技术博客</title><link>https://www.gnblilnk.dev/zh/</link><description>Recent content on 👾 Gina的技术博客</description><generator>Hugo</generator><language>zh</language><lastBuildDate>Mon, 20 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.gnblilnk.dev/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>Github的总体工作流程</title><link>https://www.gnblilnk.dev/zh/posts/my-first-post/</link><pubDate>Mon, 20 Jan 2025 00:00:00 +0000</pubDate><guid>https://www.gnblilnk.dev/zh/posts/my-first-post/</guid><description>&lt;p>这是我的第一篇博客文章！&lt;/p></description></item><item><title/><link>https://www.gnblilnk.dev/zh/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.gnblilnk.dev/zh/about/</guid><description>&lt;p>Hi🙋 我是关念，这里是我的技术博客。&lt;/p>
-&lt;p>我正在 Northeastern Vancouver 读 CS Master，&lt;/p></description></item><item><title/><link>https://www.gnblilnk.dev/zh/contact/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.gnblilnk.dev/zh/contact/</guid><description>&lt;section style="max-width: 700px; margin: 3rem auto; padding: 0 1rem;">
- &lt;h1>来聊聊吧！&lt;/h1>
-
- &lt;p>
- 如果你有合作意向、对我的项目感兴趣，或者只是想打个招呼，欢迎随时联系，我很乐意聊聊开发、AI 工具、或任何有趣的技术话题。
- &lt;/p>
-
- &lt;p>你可以通过以下方式联系我：&lt;/p>
- &lt;ul>
- &lt;li>📧 邮箱：&lt;a href="mailto:Gnblink44@gmail.com">Gnblink44@gmail.com&lt;/a>&lt;/li>
- &lt;li>💼 LinkedIn：&lt;a href="https://www.linkedin.com/in/gina-shiyu-xu/" target="_blank">Shiyu (Gina) Xu｜LinkedIn&lt;/a>&lt;/li>
- &lt;/ul>
-
- &lt;p style="margin-top: 2rem;">当然你也可以直接在下方留言，我会尽量及时回复。&lt;/p>
-
-&lt;style>
- .contact-form {
- max-width: 700px;
- margin-top: 2.5rem;
- font-size: 1.125rem;
- line-height: 1.6;
- }
-
- .contact-form label {
- display: block;
- margin-bottom: 0.6rem;
- font-weight: 600;
- font-size: 1.15rem;
- }
-
- .contact-row {
- display: flex;
- gap: 1.5rem;
- flex-wrap: wrap;
- }
-
- .contact-row .half {
- flex: 1 1 48%;
- }
-
- .contact-form input,
- .contact-form textarea {
- width: 100%;
- padding: 1.2rem;
- font-size: 1.125rem;
- border: 1px solid #ccc;
- border-radius: 8px;
- box-sizing: border-box;
- margin-bottom: 2rem;
- font-family: inherit;
- }
-
- .contact-form textarea {
- resize: vertical;
- }
-
- .contact-form button {
- font-size: 1.125rem;
- font-weight: 600;
- padding: 1.05rem 2.2rem;
- background-color: #2563eb;
- color: white;
- border: none;
- border-radius: 8px;
- cursor: pointer;
- transition: background 0.3s ease;
- }
-
- .contact-form button:hover {
- background-color: #1d4ed8;
- }
-&lt;/style>
-
-&lt;form action="https://formspree.io/f/mnndjjez" method="POST" class="contact-form">
- &lt;div class="contact-row">
- &lt;div class="half">
- &lt;label for="name">姓名&lt;/label>
- &lt;input type="text" id="name" name="name" required>
- &lt;/div>
-
- &lt;div class="half">
- &lt;label for="email">邮箱&lt;/label>
- &lt;input type="email" id="email" name="email" required>
- &lt;/div>
- &lt;/div>
-
- &lt;label for="message">留言内容&lt;/label>
- &lt;textarea id="message" name="message" rows="5" required>&lt;/textarea>
-
- &lt;button type="submit">发送留言&lt;/button>
-&lt;/form>
-
-&lt;/section></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>👾 Gina的技术博客</title>
+    <link>http://localhost:1313/zh/</link>
+    <description>Recent content on 👾 Gina的技术博客</description>
+    <generator>Hugo</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 20 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Github的总体工作流程</title>
+      <link>http://localhost:1313/zh/posts/my-first-post/</link>
+      <pubDate>Mon, 20 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/my-first-post/</guid>
+      <description>&lt;p&gt;这是我的第一篇博客文章！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/zh/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/zh/about/</guid>
+      <description>&lt;p&gt;Hi🙋 我是关念，这里是我的技术博客。&lt;/p&gt;&#xA;&lt;p&gt;我正在 Northeastern Vancouver 读 CS Master，&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/zh/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/zh/contact/</guid>
+      <description>&lt;section style=&#34;max-width: 700px; margin: 3rem auto; padding: 0 1rem;&#34;&gt;&#xA;  &lt;h1&gt;来聊聊吧！&lt;/h1&gt;&#xA;&#xA;  &lt;p&gt;&#xA;    如果你有合作意向、对我的项目感兴趣，或者只是想打个招呼，欢迎随时联系，我很乐意聊聊开发、AI 工具、或任何有趣的技术话题。&#xA;  &lt;/p&gt;&#xA;&#xA;  &lt;p&gt;你可以通过以下方式联系我：&lt;/p&gt;&#xA;  &lt;ul&gt;&#xA;    &lt;li&gt;📧 邮箱：&lt;a href=&#34;mailto:Gnblink44@gmail.com&#34;&gt;Gnblink44@gmail.com&lt;/a&gt;&lt;/li&gt;&#xA;    &lt;li&gt;💼 LinkedIn：&lt;a href=&#34;https://www.linkedin.com/in/gina-shiyu-xu/&#34; target=&#34;_blank&#34;&gt;Shiyu (Gina) Xu｜LinkedIn&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;/ul&gt;&#xA;&#xA;  &lt;p style=&#34;margin-top: 2rem;&#34;&gt;当然你也可以直接在下方留言，我会尽量及时回复。&lt;/p&gt;&#xA;&#xA;&lt;style&gt;&#xA;  .contact-form {&#xA;    max-width: 700px;&#xA;    margin-top: 2.5rem;&#xA;    font-size: 1.125rem;&#xA;    line-height: 1.6;&#xA;  }&#xA;&#xA;  .contact-form label {&#xA;    display: block;&#xA;    margin-bottom: 0.6rem;&#xA;    font-weight: 600;&#xA;    font-size: 1.15rem;&#xA;  }&#xA;&#xA;  .contact-row {&#xA;    display: flex;&#xA;    gap: 1.5rem;&#xA;    flex-wrap: wrap;&#xA;  }&#xA;&#xA;  .contact-row .half {&#xA;    flex: 1 1 48%;&#xA;  }&#xA;&#xA;  .contact-form input,&#xA;  .contact-form textarea {&#xA;    width: 100%;&#xA;    padding: 1.2rem;&#xA;    font-size: 1.125rem;&#xA;    border: 1px solid #ccc;&#xA;    border-radius: 8px;&#xA;    box-sizing: border-box;&#xA;    margin-bottom: 2rem;&#xA;    font-family: inherit;&#xA;  }&#xA;&#xA;  .contact-form textarea {&#xA;    resize: vertical;&#xA;  }&#xA;&#xA;  .contact-form button {&#xA;    font-size: 1.125rem;&#xA;    font-weight: 600;&#xA;    padding: 1.05rem 2.2rem;&#xA;    background-color: #2563eb;&#xA;    color: white;&#xA;    border: none;&#xA;    border-radius: 8px;&#xA;    cursor: pointer;&#xA;    transition: background 0.3s ease;&#xA;  }&#xA;&#xA;  .contact-form button:hover {&#xA;    background-color: #1d4ed8;&#xA;  }&#xA;&lt;/style&gt;&#xA;&#xA;&lt;form action=&#34;https://formspree.io/f/mnndjjez&#34; method=&#34;POST&#34; class=&#34;contact-form&#34;&gt;&#xA;  &lt;div class=&#34;contact-row&#34;&gt;&#xA;    &lt;div class=&#34;half&#34;&gt;&#xA;      &lt;label for=&#34;name&#34;&gt;姓名&lt;/label&gt;&#xA;      &lt;input type=&#34;text&#34; id=&#34;name&#34; name=&#34;name&#34; required&gt;&#xA;    &lt;/div&gt;&#xA;&#xA;    &lt;div class=&#34;half&#34;&gt;&#xA;      &lt;label for=&#34;email&#34;&gt;邮箱&lt;/label&gt;&#xA;      &lt;input type=&#34;email&#34; id=&#34;email&#34; name=&#34;email&#34; required&gt;&#xA;    &lt;/div&gt;&#xA;  &lt;/div&gt;&#xA;&#xA;  &lt;label for=&#34;message&#34;&gt;留言内容&lt;/label&gt;&#xA;  &lt;textarea id=&#34;message&#34; name=&#34;message&#34; rows=&#34;5&#34; required&gt;&lt;/textarea&gt;&#xA;&#xA;  &lt;button type=&#34;submit&#34;&gt;发送留言&lt;/button&gt;&#xA;&lt;/form&gt;&#xA;&#xA;&lt;/section&gt;</description>
+    </item>
+  </channel>
+</rss>
