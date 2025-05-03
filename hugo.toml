@@ -36,7 +36,7 @@ style = "github-dark"
 
   customCSS = ["css/custom.css"]
   # customSCSS = ["scss/custom.scss"]
-  customJS = []
+  customJS = ["js/scroll-handler.js"]
 
   homeURL = "https://www.gnblilnk.dev/"
 

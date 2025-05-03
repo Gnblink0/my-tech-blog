@@ -45,14 +45,14 @@ What a superpower!
 
 ### 总体流程
 
-1. 创建并且链接本地文件夹和远程的仓库，见 [Github的总体工作流程](https://www.gnblilnk.dev/posts/my-first-post/#%e5%88%9b%e5%bb%ba-repository-%e5%b9%b6%e4%b8%94%e8%bf%9e%e6%8e%a5%e6%9c%ac%e5%9c%b0%e5%92%8c%e8%bf%9c%e7%a8%8b)
+1. 创建并且链接本地文件夹和远程的仓库，见 [Github的总体工作流程](#创建-repository-并且连接本地和远程)
 2. 保证本地和远程的文件同步一致
-	- 如果远程是最新的，Pull 远程的内容到本地 [[#Pull]]
-	- 如果本地是最新的，ACP，见[[#保存修改和推送到远程 (Develop and Add, commit, push)]]
-3. 创建并切换到新分支，在新分支上开发，见[[#管理 Branch]]
-4. 保存更新，并且把本地代码推送到远程，见[[#保存修改和推送到远程 (Develop and Add, commit, push)]]
-5. 把远程的分支代码和代码合并，见 [[#Pull Request and Merge]]
-6. 在本地切换回主分支，拉取最新代码 [[#Pull]]
+   - 如果远程是最新的，Pull 远程的内容到本地 [Pull](#pull)
+   - 如果本地是最新的，ACP，见[保存修改和推送到远程](#保存修改和推送到远程-develop-and-add-commit-push)
+3. 创建并切换到新分支，在新分支上开发，见[管理 Branch](#管理-branch)
+4. 保存更新，并且把本地代码推送到远程，见[保存修改和推送到远程](#保存修改和推送到远程-develop-and-add-commit-push)
+5. 把远程的分支代码和代码合并，见 [Pull Request and Merge](#pull-request-and-merge)
+6. 在本地切换回主分支，拉取最新代码 [Pull](#pull)
 7. 继续回到第三步
 
 ### 创建 Repository 并且连接本地和远程
