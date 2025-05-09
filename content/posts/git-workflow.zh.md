@@ -29,7 +29,7 @@ What a superpower!
 
 所以当我决定搭建一个 tech blog 时，脑海里浮现的第一篇文章就是这篇：**基于 Github Flow 的 Git 总体工作流程**。
 
-这篇笔记不会介绍任何 Git 的基础知识或原理，也不会手把手教学，它更像一张实际开发中的 cheat sheet，**总结了我作为一个已经掌握 GitHub 基本操作的开发者，在日常项目协作中遵循的一套标准流程和反复用到的命令。**
+为了cover整体	的同时避免冗长的篇幅，这篇笔记不会介绍 Git 的基础知识原理，也不会手把手教学，它更像一张实际开发中的 cheat sheet，**总结了我作为一个已经掌握 GitHub 基本操作的开发者，在日常项目协作中遵循的一套标准流程和反复用到的命令。** 也就是说我不会截图教你如何在GitHub里创建账号和repository，也不会提醒你要先cd进入某个文件夹再git clone，如果你看不懂其中的一步或者运行后报错，我鼓励你把整篇文章复制粘贴给GPT并且指出你不懂的那一步。
 
 如果你已经：
 - 有 Github 账号
@@ -45,9 +45,9 @@ What a superpower!
 
 ### 总体流程
 
-1. 创建并且链接本地文件夹和远程的仓库，见 [Github的总体工作流程](#创建-repository-并且连接本地和远程)
+1. [创建并且链接本地文件夹和远程的仓库](#创建-repository-并且连接本地和远程)
 2. 保证本地和远程的文件同步一致
-   - 如果远程是最新的，Pull 远程的内容到本地 [Pull](#pull)
+   - 如果远程是最新的，[Pull](#pull) 远程的内容到本地 
    - 如果本地是最新的，ACP，见[保存修改和推送到远程](#保存修改和推送到远程-develop-and-add-commit-push)
 3. 创建并切换到新分支，在新分支上开发，见[管理 Branch](#管理-branch)
 4. 保存更新，并且把本地代码推送到远程，见[保存修改和推送到远程](#保存修改和推送到远程-develop-and-add-commit-push)
@@ -55,14 +55,22 @@ What a superpower!
 6. 在本地切换回主分支，拉取最新代码 [Pull](#pull)
 7. 继续回到第三步
 
+![Four Areas of Git](https://picture-guan.oss-cn-hangzhou.aliyuncs.com/Blank%20diagram%20Lucidchart.png)
+
 ### 创建 Repository 并且连接本地和远程
+
+第一步当然是创建repository，我们有远程和本地两个repository，而且初始化时要保证两者的一致和连接。
+
+按照习惯，你可以先选择先创建远程或者本地的repository。
 
 - 方法 1：在远程创建 repository，然后 clone 到本地
 	1. 在 GitHub 上创建 Repository
 	2. 进入想要的目标文件夹，将远程 repository clone 到本地
-	  `git clone <repository-url>`
+```bash
+git clone <repository-url>
+```
 
-- 方法 2：在本地创建文件夹，在远程创建 repository，然后把两者连接起来
+- 方法 2：在本地创建项目文件夹作为本地repository，在远程创建 repository，然后把两者连接起来
 	1. 在本地创建项目文件夹，然后初始化 git
 	  `git init`
 	2.  在 GitHub 上创建 Repository

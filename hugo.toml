@@ -15,6 +15,13 @@ shortname = "yourdiscussshortname"
 [markup.highlight]
 style = "github-dark"
 
+[markup.goldmark.extensions]
+typographer = true
+strikethrough = true
+
+[markup.goldmark.extensions.extras]
+mark = { enable = true }
+
 [params]
   author = "Gina Xu"
   info = "I build things for Web & Mobile"
@@ -36,7 +43,7 @@ style = "github-dark"
 
   customCSS = ["css/custom.css"]
   # customSCSS = ["scss/custom.scss"]
-  customJS = ["js/scroll-handler.js"]
+  customJS = ["js/scroll-handler.js", "js/code-copy.js"]
 
   homeURL = "https://www.gnblilnk.dev/"
 

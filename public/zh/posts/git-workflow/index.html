@@ -257,7 +257,7 @@ What a superpower!
 <p>虽然我在这之前也接触过 GitHub，自学过一些命令和原理，也写过一些 side projects，但这是我第一次在<strong>真实的多人开发中，从头到尾、系统而规范地使用 Git</strong>。这一过程也让我真正体会到版本控制不仅是工具，更是一种思维方式：它帮助我们记录、协作、追踪、理解整个项目的演进轨迹。现在回头看，我能明显感觉到自己在开发习惯上的成熟 —— 不再是临时查命令、随手操作，而是建立起了“Git-first”的工作流程意识。</p>
 <p>我当时也已经习惯用卡片笔记法（zettelkasten）整理我在 CS 中学习到的概念和方法，关于 git 的这一张卡片一直是我最常打开 check 的一张。后来另一门课也有一个 team project，其中一个队友不太熟悉 Git，我干脆把那张卡片导出成 PDF 发给了她作为“入门手册”。</p>
 <p>所以当我决定搭建一个 tech blog 时，脑海里浮现的第一篇文章就是这篇：<strong>基于 Github Flow 的 Git 总体工作流程</strong>。</p>
-<p>这篇笔记不会介绍任何 Git 的基础知识或原理，也不会手把手教学，它更像一张实际开发中的 cheat sheet，<strong>总结了我作为一个已经掌握 GitHub 基本操作的开发者，在日常项目协作中遵循的一套标准流程和反复用到的命令。</strong></p>
+<p>为了cover整体	的同时避免冗长的篇幅，这篇笔记不会介绍 Git 的基础知识原理，也不会手把手教学，它更像一张实际开发中的 cheat sheet，<strong>总结了我作为一个已经掌握 GitHub 基本操作的开发者，在日常项目协作中遵循的一套标准流程和反复用到的命令。</strong> 也就是说我不会截图教你如何在GitHub里创建账号和repository，也不会提醒你要先cd进入某个文件夹再git clone，如果你看不懂其中的一步或者运行后报错，我鼓励你把整篇文章复制粘贴给GPT并且指出你不懂的那一步。</p>
 <p>如果你已经：</p>
 <ul>
 <li>有 Github 账号</li>
@@ -282,14 +282,14 @@ What a superpower!
   </a>
 </h3>
 <ol>
-<li>创建并且链接本地文件夹和远程的仓库，见 <a href="#%e5%88%9b%e5%bb%ba-repository-%e5%b9%b6%e4%b8%94%e8%bf%9e%e6%8e%a5%e6%9c%ac%e5%9c%b0%e5%92%8c%e8%bf%9c%e7%a8%8b"
+<li><a href="#%e5%88%9b%e5%bb%ba-repository-%e5%b9%b6%e4%b8%94%e8%bf%9e%e6%8e%a5%e6%9c%ac%e5%9c%b0%e5%92%8c%e8%bf%9c%e7%a8%8b"
     class="internal-link"
-    onclick="saveScrollPosition(event)">Github的总体工作流程</a></li>
+    onclick="saveScrollPosition(event)">创建并且链接本地文件夹和远程的仓库</a></li>
 <li>保证本地和远程的文件同步一致
 <ul>
-<li>如果远程是最新的，Pull 远程的内容到本地 <a href="#pull"
+<li>如果远程是最新的，<a href="#pull"
     class="internal-link"
-    onclick="saveScrollPosition(event)">Pull</a></li>
+    onclick="saveScrollPosition(event)">Pull</a> 远程的内容到本地</li>
 <li>如果本地是最新的，ACP，见<a href="#%e4%bf%9d%e5%ad%98%e4%bf%ae%e6%94%b9%e5%92%8c%e6%8e%a8%e9%80%81%e5%88%b0%e8%bf%9c%e7%a8%8b-develop-and-add-commit-push"
     class="internal-link"
     onclick="saveScrollPosition(event)">保存修改和推送到远程</a></li>
@@ -309,6 +309,10 @@ What a superpower!
     onclick="saveScrollPosition(event)">Pull</a></li>
 <li>继续回到第三步</li>
 </ol>
+<p><figure>
+  <img src="https://picture-guan.oss-cn-hangzhou.aliyuncs.com/Blank%20diagram%20Lucidchart.png" alt="Four Areas of Git" >
+  <figcaption>Four Areas of Git</figcaption>
+</figure></p>
 <h3 id="创建-repository-并且连接本地和远程">
   创建 Repository 并且连接本地和远程
   <a class="heading-link" href="#%e5%88%9b%e5%bb%ba-repository-%e5%b9%b6%e4%b8%94%e8%bf%9e%e6%8e%a5%e6%9c%ac%e5%9c%b0%e5%92%8c%e8%bf%9c%e7%a8%8b">
@@ -316,17 +320,31 @@ What a superpower!
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>第一步当然是创建repository，我们有远程和本地两个repository，而且初始化时要保证两者的一致和连接。</p>
+<p>按照习惯，你可以先选择先创建远程或者本地的repository。</p>
 <ul>
-<li>
-<p>方法 1：在远程创建 repository，然后 clone 到本地</p>
+<li>方法 1：在远程创建 repository，然后 clone 到本地
 <ol>
 <li>在 GitHub 上创建 Repository</li>
-<li>进入想要的目标文件夹，将远程 repository clone 到本地
-<code>git clone &lt;repository-url&gt;</code></li>
+<li>进入想要的目标文件夹，将远程 repository clone 到本地</li>
 </ol>
 </li>
-<li>
-<p>方法 2：在本地创建文件夹，在远程创建 repository，然后把两者连接起来</p>
+</ul>
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone &lt;repository-url&gt;</span></span></code></pre></div>
+</div>
+<ul>
+<li>方法 2：在本地创建项目文件夹作为本地repository，在远程创建 repository，然后把两者连接起来
 <ol>
 <li>在本地创建项目文件夹，然后初始化 git
 <code>git init</code></li>
@@ -337,10 +355,22 @@ What a superpower!
 </ol>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git init
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git init
 </span></span><span style="display:flex;"><span>git add .
-</span></span><span style="display:flex;"><span>git commit -m <span style="color:#a5d6ff">&#34;Initial commit&#34;</span>
-</span></span></code></pre></div><ul>
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#a5d6ff">&#34;Initial commit&#34;</span></span></span></code></pre></div>
+</div>
+<ul>
 <li><code>git branch</code> : 显示分支</li>
 <li><code>git branch &lt;name&gt;</code>: 创建分支</li>
 <li><code>git checkout -b &lt;name&gt;</code>: 创建分支并切换到该分支
@@ -374,7 +404,7 @@ Main 是我们的主分支，每一次新开发，你都应该创建一个和开
 </ul>
 </li>
 <li>创建 new branch：<code>git branch &lt;name&gt;</code></li>
-<li>==快捷合并：创建分支并切换到该分支==：<code>git checkout -b &lt;name&gt;</code></li>
+<li><mark>快捷合并：创建分支并切换到该分支</mark>：<code>git checkout -b &lt;name&gt;</code></li>
 </ul>
 </li>
 <li>
@@ -563,6 +593,11 @@ Main 是我们的主分支，每一次新开发，你都应该创建一个和开
   
   
   <script src="/js/scroll-handler.js"></script>
+  
+  
+  
+  
+  <script src="/js/code-copy.js"></script>
   
   
 

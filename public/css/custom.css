@@ -32,7 +32,7 @@ figcaption {
    Scroll Behavior
    ========================================================================== */
 /* add smooth scroll to the whole HTML */
-html {
+.content {
   scroll-behavior: smooth;
 }
 
@@ -103,4 +103,74 @@ html {
   .back-to-position {
     transition: none;
   }
+}
+
+/* ==========================================================================
+   Text Highlight Styles
+   ========================================================================== */
+mark {
+  background-color: #fff3b4;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* adapt to dark mode */
+@media (prefers-color-scheme: dark) {
+  mark {
+    background-color: rgba(255, 243, 180, 0.2);
+    color: inherit;
+  }
+}
+
+/* ==========================================================================
+   List Styles
+   ========================================================================== */
+   li p {
+    margin-bottom: 0.1em;
+   }
+
+   ol {
+    padding-left: 2em;
+   }
+
+   ul {
+    padding-left: 2em;
+   }
+
+/* 代码块容器 */
+.code-block-wrapper {
+  position: relative;
+  margin: 1em 0;
+}
+
+/* 代码块头部 */
+.code-block-header {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.5em;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+/* 语言标签 */
+.code-block-lang {
+  font-size: 0.8em;
+  color: #666;
+  text-transform: uppercase;
+}
+
+/* 复制按钮 */
+.copy-button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 0.2em 0.5em;
+  transition: color 0.2s;
+}
+
+.copy-button:hover {
+  color: #333;
 }
