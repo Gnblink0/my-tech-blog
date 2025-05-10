@@ -61,7 +61,7 @@ What a superpower!
 
 第一步当然是创建repository，我们有远程和本地两个repository，而且初始化时要保证两者的一致和连接。
 
-按照习惯，你可以先选择先创建远程或者本地的repository。
+按照习惯，你可以：先选择先创建远程的repository 或者 先创建本地的repository。
 
 - 方法 1：在远程创建 repository，然后 clone 到本地
 	1. 在 GitHub 上创建 Repository
@@ -72,7 +72,7 @@ git clone <repository-url>
 
 - 方法 2：在本地创建项目文件夹作为本地repository，在远程创建 repository，然后把两者连接起来
 	1. 在本地创建项目文件夹，然后初始化 git
-	  `git init`
+`git init`
 	2.  在 GitHub 上创建 Repository
 	3. 把两者关联起来
 	  在文件夹里输入：`git remote add origin <repository-url>`
@@ -83,16 +83,19 @@ git add .
 git commit -m "Initial commit"
 ```
 
+### 管理 Branch
+
+> [!warning]  Good Practic: 为新开发创建新 branch
+> Main 是我们的主分支，每一次新开发，你都应该创建一个和开发相关的新分支，而不是直接在主分支上开发
+
+
 -   `git branch` : 显示分支
 -   `git branch <name>`: 创建分支
 -   `git checkout -b <name>`: 创建分支并切换到该分支
     -   相当于 `git branch <name>; git checkout <name>`
 -   `git merge <revision>`: 合并到当前分支
+-   
 
-### 管理 Branch
-
-> [!warning]  Good Practic: 为新开发创建新 branch
-> Main 是我们的主分支，每一次新开发，你都应该创建一个和开发相关的新分支，而不是直接在主分支上开发
 
 - 显示目前的所有 branches：`git branch`
 

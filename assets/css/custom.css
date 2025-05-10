@@ -136,14 +136,17 @@ mark {
    ul {
     padding-left: 2em;
    }
-
-/* 代码块容器 */
+   
+/* ==========================================================================
+   Code Block Styles
+   ========================================================================== */
+/* code block container */
 .code-block-wrapper {
   position: relative;
   margin: 1em 0;
 }
 
-/* 代码块头部 */
+/* code block header */
 .code-block-header {
   position: absolute;
   right: 0;
@@ -154,14 +157,14 @@ mark {
   align-items: center;
 }
 
-/* 语言标签 */
+/* language label */
 .code-block-lang {
   font-size: 0.8em;
   color: #666;
   text-transform: uppercase;
 }
 
-/* 复制按钮 */
+/* copy button */
 .copy-button {
   background: none;
   border: none;
@@ -174,3 +177,9 @@ mark {
 .copy-button:hover {
   color: #333;
 }
+
+.highlight pre {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
