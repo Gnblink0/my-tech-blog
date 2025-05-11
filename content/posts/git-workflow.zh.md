@@ -61,59 +61,61 @@ What a superpower!
 
 第一步当然是创建repository，我们有远程和本地两个repository，而且初始化时要保证两者的一致和连接。
 
-按照习惯，你可以：先选择先创建远程的repository 或者 先创建本地的repository。
+按照习惯，你可以选择：先创建远程repository 或者 先创建本地repository。
 
-- 方法 1：在远程创建 repository，然后 clone 到本地
-	1. 在 GitHub 上创建 Repository
-	2. 进入想要的目标文件夹，将远程 repository clone 到本地
-```bash
-git clone <repository-url>
-```
+#### 方法 1：在远程创建 repository，然后 clone 到本地
+1. 在 GitHub 上创建 Repository
+2. 进入想要的目标文件夹，将远程 repository clone 到本地
+	```bash
+	git clone <repository-url>
+	```
 
-- 方法 2：在本地创建项目文件夹作为本地repository，在远程创建 repository，然后把两者连接起来
-	1. 在本地创建项目文件夹，然后初始化 git
-`git init`
-	2.  在 GitHub 上创建 Repository
-	3. 把两者关联起来
-	  在文件夹里输入：`git remote add origin <repository-url>`
-	4. 把本地的修改提交到远程（不要忘记这一步）：
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-```
+#### 方法 2：在本地创建项目文件夹，在远程创建 repository，然后把两者连接起来
+1. 在本地创建项目文件夹，然后初始化 git
+	```bash
+	git init
+	```
+2.  在 GitHub 上创建 Repository
+3. 把两者关联起来  
+	进入文件夹，输入：
+
+	```bash
+	git remote add origin <repository-url>
+	```
+4. 把本地的修改提交到远程（不要忘记这一步）：
+	```bash
+	git init
+	git add .
+	git commit -m "Initial commit"
+	```
 
 ### 管理 Branch
 
-> [!warning]  Good Practic: 为新开发创建新 branch
+> [!success]  Good Practic in Github Flow: 为新开发创建新 branch
 > Main 是我们的主分支，每一次新开发，你都应该创建一个和开发相关的新分支，而不是直接在主分支上开发
 
 
--   `git branch` : 显示分支
--   `git branch <name>`: 创建分支
--   `git checkout -b <name>`: 创建分支并切换到该分支
-    -   相当于 `git branch <name>; git checkout <name>`
--   `git merge <revision>`: 合并到当前分支
--   
-
-
-- 显示目前的所有 branches：`git branch`
-
-- New Branch
-	- 切换到 new branch：`git checkout <name>`
-		- 你也可以在 [[IDE]] 里看到分支的图形界面：shift+command+p，输入 git check 然后选择 `Git: Checkout to...`
+- 查看分支 (Read)
+  - 查看包括目前所有 branches 的 list：`git branch`
+  - 切换到一个具体的 branch 查看该 branch 下的代码 `git checkout <name>`
+    - 你也可以在 [[IDE]] 里看到分支的图形界面：shift+command+p，输入 git check 然后选择 `Git: Checkout to...`
+- 新分支 (Create)
 	- 创建 new branch：`git branch <name>`
-	- ==快捷合并：创建分支并切换到该分支==：`git checkout -b <name>`
+	- ==快捷合并：创建分支并切换到该分支==：`git checkout -b <name>`， 相当于 `git branch <name>; git checkout <name>`
 
-- 删除
+- 删除 (Delete)
 	- 删除本地分支 `git branch -D <name>`
 	- 同时删除本地和远程分支 `git branch -d feature-branch && git push origin --delete feature-branch
 	- 自动删除所有已 merge 的本地和远程分支 `git branch --merged main | grep -v "main" | xargs -I {} git push origin --delete {}`
 `
 
+- 合并 (Merge)
+  - 将现在所在的分支，合并到目标分支 `git merge <target-branch-name>`
+
 目前我们有四个地方：本地主分支、远程主分支、本地特定分支、远程特定分支
 
 你现在在 本地特定分支，和此分支相关的开发都要在这个分支上开发。
+
 ### 保存修改和推送到远程 (Develop and Add, commit, push)
 
 目的：将 本地特定分支 的内容推送到 远程特定分支。
@@ -175,3 +177,80 @@ git commit -m "Initial commit"
 ## 参考链接
 
 [GitHub flow - GitHub Docs](https://docs.github.com/en/get-started/using-github/github-flow)
+
+Your original message in English:
+
+> ### Manage Branches
+>
+> > ✅ Good Practice in GitHub Flow: Always create a new branch for new development
+> > `main` is our main branch. For each new feature or change, you should create a relevant new branch instead of working directly on `main`.
+>
+> * `git merge <revision>`: merges the given revision into the current branch
+>
+> * **View branches**
+>
+>   * List all local branches: `git branch`
+>   * Switch to a specific branch to view code: `git checkout <name>`
+>
+>     * You can also see branches graphically in the IDE: press `shift+command+p`, type `git check`, and choose `Git: Checkout to...`
+>
+> * **Create branches**
+>
+>   * Create a new branch: `git branch <name>`
+>   * Quick switch and create: `git checkout -b <name>` (same as `git branch <name>; git checkout <name>`)
+>
+> * **Delete branches**
+>
+>   * Delete local branch: `git branch -D <name>`
+>   * Delete local and remote: `git branch -d feature-branch && git push origin --delete feature-branch`
+>   * Auto-delete all merged branches (except `main`):
+>
+>     ```bash
+>     git branch --merged main | grep -v "main" | xargs -I {} git push origin --delete {}  
+>     ```
+>
+> * ## **Merge**
+
+---
+
+你问 “合并 有什么相关操作”，我来帮你补全 merge 相关常用指令：
+
+### 🧩 合并（Merge）
+
+* **将某个分支合并到当前分支**
+
+  ```bash
+  git merge <branch-name>
+  ```
+
+  > 例如你在 `main` 上，执行 `git merge feature/login` 就会把 `feature/login` 的修改合并到 `main`。
+
+* **解决冲突**
+  如果 merge 时出现冲突（conflict），你需要手动修改冲突文件，然后：
+
+  ```bash
+  git add .
+  git commit
+  ```
+
+* **查看 merge 状态**
+
+  ```bash
+  git status
+  ```
+
+* **放弃 merge 操作（如果后悔了）**
+
+  ```bash
+  git merge --abort
+  ```
+
+* **禁用 fast-forward（保留分支信息）**
+
+  ```bash
+  git merge --no-ff <branch-name>
+  ```
+
+  > 用于保留 merge commit 记录，更清晰看到谁 merge 了什么。
+
+你现在是在写项目笔记吗？需要我帮你整理成更完整的文档结构或 Obsidian 格式吗？

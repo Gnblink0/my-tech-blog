@@ -115,7 +115,8 @@ What a superpower!
 
 
 
-<script defer src="https://umami-one-khaki-61.vercel.app/script.js" data-website-id="35b07e64-671d-454a-9404-87bc44cf375d"></script>
+
+
 </head>
 
 
@@ -210,7 +211,7 @@ What a superpower!
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              4-minute read
             </span>
           </div>
           
@@ -323,15 +324,17 @@ What a superpower!
   </a>
 </h3>
 <p>第一步当然是创建repository，我们有远程和本地两个repository，而且初始化时要保证两者的一致和连接。</p>
-<p>按照习惯，你可以：先选择先创建远程的repository 或者 先创建本地的repository。</p>
-<ul>
-<li>方法 1：在远程创建 repository，然后 clone 到本地
+<p>按照习惯，你可以选择：先创建远程repository 或者 先创建本地repository。</p>
+<h4 id="方法-1在远程创建-repository然后-clone-到本地">
+  方法 1：在远程创建 repository，然后 clone 到本地
+  <a class="heading-link" href="#%e6%96%b9%e6%b3%95-1%e5%9c%a8%e8%bf%9c%e7%a8%8b%e5%88%9b%e5%bb%ba-repository%e7%84%b6%e5%90%8e-clone-%e5%88%b0%e6%9c%ac%e5%9c%b0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>在 GitHub 上创建 Repository</li>
-<li>进入想要的目标文件夹，将远程 repository clone 到本地</li>
-</ol>
-</li>
-</ul>
+<li>进入想要的目标文件夹，将远程 repository clone 到本地
 
 
 <div class="code-block-wrapper">
@@ -345,18 +348,54 @@ What a superpower!
   </div>
    <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone &lt;repository-url&gt;</span></span></code></pre></div>
 </div>
-<ul>
-<li>方法 2：在本地创建项目文件夹作为本地repository，在远程创建 repository，然后把两者连接起来
-<ol>
-<li>在本地创建项目文件夹，然后初始化 git
-<code>git init</code></li>
-<li>在 GitHub 上创建 Repository</li>
-<li>把两者关联起来
-在文件夹里输入：<code>git remote add origin &lt;repository-url&gt;</code></li>
-<li>把本地的修改提交到远程（不要忘记这一步）：</li>
-</ol>
 </li>
-</ul>
+</ol>
+<h4 id="方法-2在本地创建项目文件夹在远程创建-repository然后把两者连接起来">
+  方法 2：在本地创建项目文件夹，在远程创建 repository，然后把两者连接起来
+  <a class="heading-link" href="#%e6%96%b9%e6%b3%95-2%e5%9c%a8%e6%9c%ac%e5%9c%b0%e5%88%9b%e5%bb%ba%e9%a1%b9%e7%9b%ae%e6%96%87%e4%bb%b6%e5%a4%b9%e5%9c%a8%e8%bf%9c%e7%a8%8b%e5%88%9b%e5%bb%ba-repository%e7%84%b6%e5%90%8e%e6%8a%8a%e4%b8%a4%e8%80%85%e8%bf%9e%e6%8e%a5%e8%b5%b7%e6%9d%a5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p>在本地创建项目文件夹，然后初始化 git</p>
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git init</span></span></code></pre></div>
+</div>
+</li>
+<li>
+<p>在 GitHub 上创建 Repository</p>
+</li>
+<li>
+<p>把两者关联起来<br>
+进入文件夹，输入：</p>
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote add origin &lt;repository-url&gt;</span></span></code></pre></div>
+</div>
+</li>
+<li>
+<p>把本地的修改提交到远程（不要忘记这一步）：</p>
 
 
 <div class="code-block-wrapper">
@@ -372,6 +411,8 @@ What a superpower!
 </span></span><span style="display:flex;"><span>git add .
 </span></span><span style="display:flex;"><span>git commit -m <span style="color:#a5d6ff">&#34;Initial commit&#34;</span></span></span></code></pre></div>
 </div>
+</li>
+</ol>
 <h3 id="管理-branch">
   管理 Branch
   <a class="heading-link" href="#%e7%ae%a1%e7%90%86-branch">
@@ -379,49 +420,52 @@ What a superpower!
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<blockquote>
-<p>[!warning]  Good Practic: 为新开发创建新 branch
-Main 是我们的主分支，每一次新开发，你都应该创建一个和开发相关的新分支，而不是直接在主分支上开发</p>
-</blockquote>
+ 
+<div class="callout callout-success">
+  <div class="callout-title">
+    <div class="callout-icon">
+      ✅
+    </div>
+    <div class="callout-title-text">
+       Good Practic in Github Flow: 为新开发创建新 branch 
+    </div>
+  </div>
+  <div class="callout-content"><p>Main 是我们的主分支，每一次新开发，你都应该创建一个和开发相关的新分支，而不是直接在主分支上开发</p>
+</div>
+</div>
+
 <ul>
 <li>
-<p><code>git branch</code> : 显示分支</p>
-</li>
-<li>
-<p><code>git branch &lt;name&gt;</code>: 创建分支</p>
-</li>
-<li>
-<p><code>git checkout -b &lt;name&gt;</code>: 创建分支并切换到该分支</p>
+<p>查看分支 (Read)</p>
 <ul>
-<li>相当于 <code>git branch &lt;name&gt;; git checkout &lt;name&gt;</code></li>
-</ul>
-</li>
-<li>
-<p><code>git merge &lt;revision&gt;</code>: 合并到当前分支</p>
-</li>
-<li></li>
-<li>
-<p>显示目前的所有 branches：<code>git branch</code></p>
-</li>
-<li>
-<p>New Branch</p>
-<ul>
-<li>切换到 new branch：<code>git checkout &lt;name&gt;</code>
+<li>查看包括目前所有 branches 的 list：<code>git branch</code></li>
+<li>切换到一个具体的 branch 查看该 branch 下的代码 <code>git checkout &lt;name&gt;</code>
 <ul>
 <li>你也可以在 [[IDE]] 里看到分支的图形界面：shift+command+p，输入 git check 然后选择 <code>Git: Checkout to...</code></li>
 </ul>
 </li>
-<li>创建 new branch：<code>git branch &lt;name&gt;</code></li>
-<li><mark>快捷合并：创建分支并切换到该分支</mark>：<code>git checkout -b &lt;name&gt;</code></li>
 </ul>
 </li>
 <li>
-<p>删除</p>
+<p>新分支 (Create)</p>
+<ul>
+<li>创建 new branch：<code>git branch &lt;name&gt;</code></li>
+<li><mark>快捷合并：创建分支并切换到该分支</mark>：<code>git checkout -b &lt;name&gt;</code>， 相当于 <code>git branch &lt;name&gt;; git checkout &lt;name&gt;</code></li>
+</ul>
+</li>
+<li>
+<p>删除 (Delete)</p>
 <ul>
 <li>删除本地分支 <code>git branch -D &lt;name&gt;</code></li>
 <li>同时删除本地和远程分支 `git branch -d feature-branch &amp;&amp; git push origin &ndash;delete feature-branch</li>
 <li>自动删除所有已 merge 的本地和远程分支 <code>git branch --merged main | grep -v &quot;main&quot; | xargs -I {} git push origin --delete {}</code>
 `</li>
+</ul>
+</li>
+<li>
+<p>合并 (Merge)</p>
+<ul>
+<li>将现在所在的分支，合并到目标分支 <code>git merge &lt;target-branch-name&gt;</code></li>
 </ul>
 </li>
 </ul>
@@ -529,6 +573,186 @@ Main 是我们的主分支，每一次新开发，你都应该创建一个和开
     class="external-link"
     target="_blank"
     rel="noopener">GitHub flow - GitHub Docs</a></p>
+<p>Your original message in English:</p>
+ 
+<blockquote><h3 id="manage-branches">
+  Manage Branches
+  <a class="heading-link" href="#manage-branches">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+ 
+<blockquote><p>✅ Good Practice in GitHub Flow: Always create a new branch for new development
+<code>main</code> is our main branch. For each new feature or change, you should create a relevant new branch instead of working directly on <code>main</code>.</p>
+</blockquote>
+
+<ul>
+<li>
+<p><code>git merge &lt;revision&gt;</code>: merges the given revision into the current branch</p>
+</li>
+<li>
+<p><strong>View branches</strong></p>
+<ul>
+<li>
+<p>List all local branches: <code>git branch</code></p>
+</li>
+<li>
+<p>Switch to a specific branch to view code: <code>git checkout &lt;name&gt;</code></p>
+<ul>
+<li>You can also see branches graphically in the IDE: press <code>shift+command+p</code>, type <code>git check</code>, and choose <code>Git: Checkout to...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Create branches</strong></p>
+<ul>
+<li>Create a new branch: <code>git branch &lt;name&gt;</code></li>
+<li>Quick switch and create: <code>git checkout -b &lt;name&gt;</code> (same as <code>git branch &lt;name&gt;; git checkout &lt;name&gt;</code>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete branches</strong></p>
+<ul>
+<li>
+<p>Delete local branch: <code>git branch -D &lt;name&gt;</code></p>
+</li>
+<li>
+<p>Delete local and remote: <code>git branch -d feature-branch &amp;&amp; git push origin --delete feature-branch</code></p>
+</li>
+<li>
+<p>Auto-delete all merged branches (except <code>main</code>):</p>
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch --merged main | grep -v <span style="color:#a5d6ff">&#34;main&#34;</span> | xargs -I <span style="color:#ff7b72;font-weight:bold">{}</span> git push origin --delete <span style="color:#ff7b72;font-weight:bold">{}</span>  </span></span></code></pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<h2 id="merge">
+  <strong>Merge</strong>
+  <a class="heading-link" href="#merge">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+</li>
+</ul>
+</blockquote>
+
+<hr>
+<p>你问 “合并 有什么相关操作”，我来帮你补全 merge 相关常用指令：</p>
+<h3 id="-合并merge">
+  🧩 合并（Merge）
+  <a class="heading-link" href="#-%e5%90%88%e5%b9%b6merge">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>将某个分支合并到当前分支</strong></p>
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge &lt;branch-name&gt;</span></span></code></pre></div>
+</div>
+ 
+<blockquote><p>例如你在 <code>main</code> 上，执行 <code>git merge feature/login</code> 就会把 <code>feature/login</code> 的修改合并到 <code>main</code>。</p>
+</blockquote>
+
+</li>
+<li>
+<p><strong>解决冲突</strong>
+如果 merge 时出现冲突（conflict），你需要手动修改冲突文件，然后：</p>
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit</span></span></code></pre></div>
+</div>
+</li>
+<li>
+<p><strong>查看 merge 状态</strong></p>
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status</span></span></code></pre></div>
+</div>
+</li>
+<li>
+<p><strong>放弃 merge 操作（如果后悔了）</strong></p>
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge --abort</span></span></code></pre></div>
+</div>
+</li>
+<li>
+<p><strong>禁用 fast-forward（保留分支信息）</strong></p>
+
+
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    
+    <span class="code-block-lang">bash</span>
+    
+    <button class="copy-button" title="Copy code">
+      <i class="fa fa-copy"></i>
+    </button>
+  </div>
+   <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge --no-ff &lt;branch-name&gt;</span></span></code></pre></div>
+</div>
+ 
+<blockquote><p>用于保留 merge commit 记录，更清晰看到谁 merge 了什么。</p>
+</blockquote>
+
+</li>
+</ul>
+<p>你现在是在写项目笔记吗？需要我帮你整理成更完整的文档结构或 Obsidian 格式吗？</p>
 
       </div>
 

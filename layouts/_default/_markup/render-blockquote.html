@@ -1,0 +1,16 @@
+{{ $emojis := dict "caution" "⚠️" "important" "❗" "note" "📝" "tip" "💡"
+"warning" "⚠️" "success" "✅" "danger" "❌" }} {{ if eq .Type "alert" }}
+<div class="callout callout-{{ .AlertType }}">
+  <div class="callout-title">
+    <div class="callout-icon">
+      {{ transform.Emojify (index $emojis .AlertType) }}
+    </div>
+    <div class="callout-title-text">
+      {{ with .AlertTitle }} {{ . }} {{ else }} {{ title .AlertType }} {{ end }}
+    </div>
+  </div>
+  <div class="callout-content">{{ .Text }}</div>
+</div>
+{{ else }}
+<blockquote>{{ .Text }}</blockquote>
+{{ end }}

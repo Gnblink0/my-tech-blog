@@ -1,6 +1,15 @@
 /* ==========================================================================
    Project Card Styles
    ========================================================================== */
+
+   /* p {
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+   } */
+
+/* ==========================================================================
+   Project Card Styles
+   ========================================================================== */
 .project-card {
   transition: transform 0.2s;
 }
@@ -114,36 +123,55 @@ mark {
   border-radius: 2px;
 }
 
-/* adapt to dark mode */
-@media (prefers-color-scheme: dark) {
-  mark {
-    background-color: rgba(255, 243, 180, 0.2);
-    color: inherit;
+/* manually switch to dark mode */
+body.colorscheme-dark mark {
+  background-color: rgba(255, 243, 180, 0.2);
+  color: inherit;
+}
+
+/* automatically follow system theme */
+body.colorscheme-auto {
+  @media (prefers-color-scheme: dark) {
+    mark {
+      background-color: rgba(255, 243, 180, 0.2);
+      color: inherit;
+    }
   }
 }
 
 /* ==========================================================================
    List Styles
    ========================================================================== */
-   li p {
+   li p,
+   li .code-block-wrapper {
+    margin-top: 0.5em;
     margin-bottom: 0.1em;
    }
 
    ol {
     padding-left: 2em;
+    margin-bottom: 0;
+    margin-top: 0;
    }
 
    ul {
     padding-left: 2em;
    }
    
+   /* ol ~ p,
+   ol ~ .code-block-wrapper,
+   ul ~ p,
+   ul ~ .code-block-wrapper{
+    margin-top: 0;
+    margin-bottom: 0;
+   } */
 /* ==========================================================================
    Code Block Styles
    ========================================================================== */
 /* code block container */
 .code-block-wrapper {
   position: relative;
-  margin: 1em 0;
+  margin: 1em 1em;
 }
 
 /* code block header */
@@ -181,5 +209,118 @@ mark {
 .highlight pre {
   margin-bottom: 0;
   margin-top: 0;
+}
+
+/* ==========================================================================
+   Callout Styles
+   ========================================================================== */
+.callout {
+  border-radius: 8px;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-left-width: 4px;
+  border-left-style: solid;
+  background-color: var(--callout-bg);
+  border-color: var(--callout-border);
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem;
+  font-weight: 600;
+}
+
+.callout-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.callout-content {
+  margin: 1rem 0;
+  color: var(--callout-color, inherit);
+  font-size: 0.9em;
+}
+
+.callout-content p {
+  margin-top: 0;
+  margin-left: 1.5rem;
+}
+
+/* Warning style */
+.callout-warning {
+  --callout-bg: rgba(253, 240, 221, 1);
+  --callout-border: rgba(247, 185, 85, 1);
+}
+
+/* Info style */
+.callout-info {
+  --callout-bg: rgba(231, 242, 250, 1);
+  --callout-border: rgba(80, 165, 220, 1);
+}
+
+/* Tip style */
+.callout-tip {
+  --callout-bg: rgba(234, 248, 240, 1);
+  --callout-border: rgba(72, 187, 120, 1);
+}
+
+/* Success style */
+.callout-success {
+  --callout-bg: rgba(227, 252, 239, 1);
+  --callout-border: rgba(39, 174, 96, 1);
+}
+
+/* Danger style */
+.callout-danger {
+  --callout-bg: rgba(253, 235, 236, 1);
+  --callout-border: rgba(235, 87, 87, 1);
+}
+
+/* Dark mode support */
+body.colorscheme-dark .callout-warning {
+  --callout-bg: rgba(253, 240, 221, 0.1);
+}
+
+body.colorscheme-dark .callout-info {
+  --callout-bg: rgba(231, 242, 250, 0.1);
+}
+
+body.colorscheme-dark .callout-tip {
+  --callout-bg: rgba(234, 248, 240, 0.1);
+}
+
+body.colorscheme-dark .callout-success {
+  --callout-bg: rgba(227, 252, 239, 0.1);
+}
+
+body.colorscheme-dark .callout-danger {
+  --callout-bg: rgba(253, 235, 236, 0.1);
+}
+
+/* manually switch to dark mode */
+body.colorscheme-dark .back-to-position {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.colorscheme-dark .back-to-position:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* automatically follow system theme */
+body.colorscheme-auto {
+  @media (prefers-color-scheme: dark) {
+    .back-to-position {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .back-to-position:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
 }
 
