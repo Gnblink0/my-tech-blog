@@ -19,9 +19,7 @@ What a superpower!
 
 在 [MIT的The Missing Semester of Your CS Education](https://missing.csail.mit.edu/) 中就有一章专门讲 [Version Control (Git)](https://missing.csail.mit.edu/2020/version-control/)，反映了一个现实问题：Git 是开发中不可或缺的工具，但却往往是计算机教育中被忽略的“空白地带”，很多 CS 学生直到进入职场，才在手忙脚乱中被迫补上这一课。不过我作为一个幸运的 CS 学生，在 Northeastern 的 CS5520 Mobile App Development 课程里碰到一位很 practical 的老师 —— [Neda Changizi](https://www.linkedin.com/in/nedachangizi/)，她的教学并不拘泥于理论，而是紧扣“实际开发中会碰到什么、用什么、做什么”来设计课程，Git 和 GitHub 自然也成了教学的一部分：**以 [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow) 方法为原型**，每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。尤其在期末项目中，GitHub 几乎成了我们小组的“办公室” —— 我们在那里讨论、同步进度、review 对方的代码、解决 merge conflict，每天都在上面高频协作。
 
-
 ![Github Flow与其他 Github 常见工作流的区别](https://picture-guan.oss-cn-hangzhou.aliyuncs.com/20250502154844.png)
-
 
 虽然我在这之前也接触过 GitHub，自学过一些命令和原理，也写过一些 side projects，但这是我第一次在**真实的多人开发中，从头到尾、系统而规范地使用 Git**。这一过程也让我真正体会到版本控制不仅是工具，更是一种思维方式：它帮助我们记录、协作、追踪、理解整个项目的演进轨迹。现在回头看，我能明显感觉到自己在开发习惯上的成熟 —— 不再是临时查命令、随手操作，而是建立起了“Git-first”的工作流程意识。
 
@@ -29,9 +27,10 @@ What a superpower!
 
 所以当我决定搭建一个 tech blog 时，脑海里浮现的第一篇文章就是这篇：**基于 Github Flow 的 Git 总体工作流程**。
 
-为了cover整体	的同时避免冗长的篇幅，这篇笔记不会介绍 Git 的基础知识原理，也不会手把手教学，它更像一张实际开发中的 cheat sheet，**总结了我作为一个已经掌握 GitHub 基本操作的开发者，在日常项目协作中遵循的一套标准流程和反复用到的命令。** 也就是说我不会截图教你如何在GitHub里创建账号和repository，也不会提醒你要先cd进入某个文件夹再git clone，如果你看不懂其中的一步或者运行后报错，我鼓励你把整篇文章复制粘贴给GPT并且指出你不懂的那一步。
+为了cover整体的同时避免冗长的篇幅，这篇笔记不会介绍 Git 的基础知识原理，也不会手把手教学，它更像一张实际开发中的 cheat sheet，**总结了我作为一个已经掌握 GitHub 基本操作的开发者，在日常项目协作中遵循的一套标准流程和反复用到的命令。** 也就是说我不会截图教你如何在GitHub里创建账号和repository，也不会提醒你要先cd进入某个文件夹再git clone，如果你看不懂其中的一步或者运行后报错，我鼓励你把整篇文章复制粘贴给GPT并且指出你不懂的那一步。
 
 如果你已经：
+
 - 有 Github 账号
 - 懂得怎么建立 repository
 - 已经在 shell 里以 ssh 连接了 GitHub 账号
@@ -64,6 +63,7 @@ What a superpower!
 按照习惯，你可以选择：先创建远程repository 或者 先创建本地repository。
 
 #### 方法 1：在远程创建 repository，然后 clone 到本地
+
 1. 在 GitHub 上创建 Repository
 2. 进入想要的目标文件夹，将远程 repository clone 到本地
 	```bash
@@ -87,34 +87,67 @@ What a superpower!
 	git init
 	git add .
 	git commit -m "Initial commit"
+  git push -u origin main
 	```
 
-### 管理 Branch
 
+### 管理 Branch
 > [!success]  Good Practic in Github Flow: 为新开发创建新 branch
 > Main 是我们的主分支，每一次新开发，你都应该创建一个和开发相关的新分支，而不是直接在主分支上开发
 
 
 - 查看分支 (Read)
-  - 查看包括目前所有 branches 的 list：`git branch`
-  - 切换到一个具体的 branch 查看该 branch 下的代码 `git checkout <name>`
-    - 你也可以在 [[IDE]] 里看到分支的图形界面：shift+command+p，输入 git check 然后选择 `Git: Checkout to...`
+  - 查看包括目前所有 branches 的 list：
+    ```bash
+    git branch
+    ```
+  - 切换到一个具体的 branch 查看该 branch 下的代码：
+    ```bash
+    git checkout <name>
+    ```
+  - 如果你不喜欢命令行操作，你也可以在 VScode 里看到分支的图形界面：`shift+command+p`，输入 git check 然后选择：`Git: Checkout to...`
+
 - 新分支 (Create)
-	- 创建 new branch：`git branch <name>`
-	- ==快捷合并：创建分支并切换到该分支==：`git checkout -b <name>`， 相当于 `git branch <name>; git checkout <name>`
+  - 创建 new branch：
+    ```bash
+    git branch <name>
+    ```
+  - 快捷合并：创建分支并切换到该分支
+    ```bash
+    git checkout -b <name>
+    ```
+    等价于：
+    `git branch <name>; git checkout <name>`
 
 - 删除 (Delete)
-	- 删除本地分支 `git branch -D <name>`
-	- 同时删除本地和远程分支 `git branch -d feature-branch && git push origin --delete feature-branch
-	- 自动删除所有已 merge 的本地和远程分支 `git branch --merged main | grep -v "main" | xargs -I {} git push origin --delete {}`
-`
+  - 删除本地分支：
+    ```bash
+    git branch -D <name>
+    ```
+  - 同时删除本地和远程分支：
+    ```bash
+    git branch -d feature-branch && git push origin --delete feature-branch
+    ```
+  - 自动删除所有已 merge 的本地和远程分支：
+    ```bash
+    git branch --merged main | grep -v "main" | xargs -I {} git push origin --delete {}
+    ```
 
 - 合并 (Merge)
-  - 将现在所在的分支，合并到目标分支 `git merge <target-branch-name>`
+  - 将现在所在的分支，合并到目标分支：
+    ```bash
+    git merge <target-branch-name>
+    ```
 
-目前我们有四个地方：本地主分支、远程主分支、本地特定分支、远程特定分支
+目前我们有四个地方：
 
-你现在在 本地特定分支，和此分支相关的开发都要在这个分支上开发。
+1. 本地主分支：`main`  
+2. 远程主分支：`origin/main`  
+3. 本地特定分支：`<your-branch-name>`  
+4. 远程特定分支：`<origin/your-branch-name>`
+
+你现在在 **本地特定分支**，和此分支相关的开发都要在这个分支上开发。
+
 
 ### 保存修改和推送到远程 (Develop and Add, commit, push)
 

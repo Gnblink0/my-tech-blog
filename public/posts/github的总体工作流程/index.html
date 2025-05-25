@@ -1,0 +1,174 @@
+<!doctype html>
+<html
+  lang="en-us"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta name="language" content="en" />
+<meta name="viewport" content="width=device-width" />
+<title>
+    Github的总体工作流程 | Home Page
+</title>
+  <meta name="description" content="Github是开发者使用最高频的工具了，不管开发什么，只要涉及团队合作，基本上就要用到，即使是自己开发，有时候版本控制也要用到。
+最近上了一门Mobile课，老师非常 practical，基本上都在教实际开发中到底应该做什么，也包括如何正确使用 GitHub：每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。
+我之前虽然也记过 GitHub 相关操作的笔记，
+总结一下" />
+<meta property="og:url" content="http://localhost:1313/posts/github%E7%9A%84%E6%80%BB%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/">
+  <meta property="og:site_name" content="Home Page">
+  <meta property="og:title" content="Github的总体工作流程">
+  <meta property="og:description" content="Github是开发者使用最高频的工具了，不管开发什么，只要涉及团队合作，基本上就要用到，即使是自己开发，有时候版本控制也要用到。
+最近上了一门Mobile课，老师非常 practical，基本上都在教实际开发中到底应该做什么，也包括如何正确使用 GitHub：每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。
+我之前虽然也记过 GitHub 相关操作的笔记，
+总结一下">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-20T20:30:09-08:00">
+    <meta property="article:modified_time" content="2025-01-20T20:30:09-08:00">
+
+
+  <meta itemprop="name" content="Github的总体工作流程">
+  <meta itemprop="description" content="Github是开发者使用最高频的工具了，不管开发什么，只要涉及团队合作，基本上就要用到，即使是自己开发，有时候版本控制也要用到。
+最近上了一门Mobile课，老师非常 practical，基本上都在教实际开发中到底应该做什么，也包括如何正确使用 GitHub：每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。
+我之前虽然也记过 GitHub 相关操作的笔记，
+总结一下">
+  <meta itemprop="datePublished" content="2025-01-20T20:30:09-08:00">
+  <meta itemprop="dateModified" content="2025-01-20T20:30:09-08:00">
+  <meta itemprop="wordCount" content="18">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Github的总体工作流程">
+  <meta name="twitter:description" content="Github是开发者使用最高频的工具了，不管开发什么，只要涉及团队合作，基本上就要用到，即使是自己开发，有时候版本控制也要用到。
+最近上了一门Mobile课，老师非常 practical，基本上都在教实际开发中到底应该做什么，也包括如何正确使用 GitHub：每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。
+我之前虽然也记过 GitHub 相关操作的笔记，
+总结一下">
+
+<link rel="canonical" href="http://localhost:1313/posts/github%E7%9A%84%E6%80%BB%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/" />
+
+    <link rel="stylesheet" href="/css/index.css" />
+
+
+      <script src="/js/main.js" defer></script>
+  
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@id": "http://localhost:1313/posts/github%E7%9A%84%E6%80%BB%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/",
+  "@type": "BlogPosting",
+  "copyrightNotice": "Gian Xu",
+  "datePublished": "2025-01-20",
+  "description": "Github是开发者使用最高频的工具了，不管开发什么，只要涉及团队合作，基本上就要用到，即使是自己开发，有时候版本控制也要用到。\n最近上了一门Mobile课，老师非常 practical，基本上都在教实际开发中到底应该做什么，也包括如何正确使用 GitHub：每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。\n我之前虽然也记过 GitHub 相关操作的笔记，\n总结一下",
+  "headline": "Github的总体工作流程",
+  "isPartOf": {
+    "@id": "http://localhost:1313/posts/",
+    "@type": "Blog",
+    "name": "Posts"
+  },
+  "mainEntityOfPage": "http://localhost:1313/posts/github%E7%9A%84%E6%80%BB%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/",
+  "name": "Github的总体工作流程",
+  "timeRequired": "PT1M",
+  "url": "http://localhost:1313/posts/github%E7%9A%84%E6%80%BB%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/",
+  "wordCount": 18
+}
+</script>
+
+
+  </head>
+  <body>
+    <div class="container mx-auto flex max-w-prose flex-col space-y-10 p-4 md:p-6">
+      <header class="flex flex-row items-center justify-between">
+        <div>
+  <a id="skip-nav" class="sr-only" href="#maincontent">Skip to main content</a>
+  <a class="font-semibold" href="/">Home Page</a>
+</div>
+
+  <nav>
+    <ul class="flex flex-row items-center justify-end space-x-4">
+    <li>
+      <a>Notes</a
+      >
+    </li>
+    <li>
+      <a aria-current="true" class="ancestor" href="/posts/">Posts</a
+      >
+    </li>
+    </ul>
+  </nav>
+
+
+      </header>
+      <main class="prose prose-slate relative md:prose-lg prose-h1:text-[2em]" id="maincontent">
+        <article class="main">
+    <header>
+      <h1 class="!mb-1">Github的总体工作流程</h1><div class="flex flex-row items-center space-x-4">
+          <time class="text-sm italic opacity-80" datetime="2025-01-20T20:30:09-08:00"
+            >January 20, 2025</time
+          >
+        </div>
+    </header>
+
+    <p>Github是开发者使用最高频的工具了，不管开发什么，只要涉及团队合作，基本上就要用到，即使是自己开发，有时候版本控制也要用到。</p>
+<p>最近上了一门Mobile课，老师非常 practical，基本上都在教实际开发中到底应该做什么，也包括如何正确使用 GitHub：每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。</p>
+<p>我之前虽然也记过 GitHub 相关操作的笔记，</p>
+<p>总结一下</p>
+
+  </article>
+    <aside class="not-prose flex flex-col space-y-8 border-t pt-6">
+    <section class="flex flex-col space-y-4" aria-hidden="true">
+      <h2 class="flex flex-row items-center space-x-2 text-lg font-semibold">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-chart-network h-4 w-4"
+  viewBox="0 0 24 24"
+  aria-hidden="true"
+>
+  <path
+    d="m13.11 7.664 1.78 2.672M14.162 12.788l-3.324 1.424M20 4l-6.06 1.515M3 3v16a2 2 0 0 0 2 2h16"
+  />
+  <circle cx="12" cy="6" r="2" />
+  <circle cx="16" cy="12" r="2" />
+  <circle cx="9" cy="15" r="2" />
+</svg>
+
+        <span>Graph</span>
+      </h2>
+
+      <content-network-graph
+  class="h-64 ml-6"
+  data-endpoint="/graph/index.json"
+  page="/posts/github%E7%9A%84%E6%80%BB%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/"
+></content-network-graph>
+
+    </section>
+</aside>
+
+
+      </main>
+      <footer class="mt-20 border-t border-neutral-100 pt-2 text-xs">
+        <section class="items-top flex flex-row justify-between opacity-70">
+  <div class="flex flex-col space-y-2">
+      <p>Copyright &copy; 2025, Gian Xu.</p>
+
+  </div>
+    <div>
+      <a
+        href="https://github.com/michenriksen/hugo-theme-til"
+        title="Today I Learned &#8212; A Hugo theme by Michael Henriksen"
+        data-theme-version="0.6.0"
+        >theme: til</a
+      >
+    </div>
+</section>
+
+      </footer>
+    </div>
+    
+  </body>
+</html>

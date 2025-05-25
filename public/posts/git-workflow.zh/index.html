@@ -1,0 +1,2015 @@
+<!doctype html>
+<html
+  lang="en-us"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta name="language" content="en" />
+<meta name="viewport" content="width=device-width" />
+<title>
+    基于 Github Flow 的 Git 总体工作流程 | Home Page
+</title>
+  <meta name="description" content=" Why Git? Git/Github是开发者最高频使用的工具/平台，无论开发什么，只要涉及多人协作，git 就是默认的“公共语言”，有时即使一个人独自开发，git 也依然是最可靠的版本控制方案甚至极简部署工具。
+项目一旦用上 git，相当于一个人掌握了某种超能力，可以随时给世界打点（commit），根据打点让时光倒流（版本控制），还可以看到世界是怎么被不同人影响的（查看每一次改动的作者与原因），剔除出对这个世界不好的影响因素（找出导致 bug 的代码），保证主世界线收束（审查 PR、保护主分支）。
+What a superpower!
+想掌握这种控制时间、协作与秩序超能力吗？从这篇文章迈出第一步吧！
+我为什么写一篇介绍 git 的文章？ 在 MIT的The Missing Semester of Your CS Education 中就有一章专门讲 Version Control (Git)，反映了一个现实问题：Git 是开发中不可或缺的工具，但却往往是计算机教育中被忽略的“空白地带”，很多 CS 学生直到进入职场，才在手忙脚乱中被迫补上这一课。不过我作为一个幸运的 CS 学生，在 Northeastern 的 CS5520 Mobile App Development 课程里碰到一位很 practical 的老师 —— Neda Changizi，她的教学并不拘泥于理论，而是紧扣“实际开发中会碰到什么、用什么、做什么”来设计课程，Git 和 GitHub 自然也成了教学的一部分：以 GitHub flow 方法为原型，每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。尤其在期末项目中，GitHub 几乎成了我们小组的“办公室” —— 我们在那里讨论、同步进度、review 对方的代码、解决 merge conflict，每天都在上面高频协作。" />
+<meta property="og:url" content="http://localhost:1313/posts/git-workflow.zh/">
+  <meta property="og:site_name" content="Home Page">
+  <meta property="og:title" content="基于 Github Flow 的 Git 总体工作流程">
+  <meta property="og:description" content="Why Git? Git/Github是开发者最高频使用的工具/平台，无论开发什么，只要涉及多人协作，git 就是默认的“公共语言”，有时即使一个人独自开发，git 也依然是最可靠的版本控制方案甚至极简部署工具。
+项目一旦用上 git，相当于一个人掌握了某种超能力，可以随时给世界打点（commit），根据打点让时光倒流（版本控制），还可以看到世界是怎么被不同人影响的（查看每一次改动的作者与原因），剔除出对这个世界不好的影响因素（找出导致 bug 的代码），保证主世界线收束（审查 PR、保护主分支）。
+What a superpower!
+想掌握这种控制时间、协作与秩序超能力吗？从这篇文章迈出第一步吧！
+我为什么写一篇介绍 git 的文章？ 在 MIT的The Missing Semester of Your CS Education 中就有一章专门讲 Version Control (Git)，反映了一个现实问题：Git 是开发中不可或缺的工具，但却往往是计算机教育中被忽略的“空白地带”，很多 CS 学生直到进入职场，才在手忙脚乱中被迫补上这一课。不过我作为一个幸运的 CS 学生，在 Northeastern 的 CS5520 Mobile App Development 课程里碰到一位很 practical 的老师 —— Neda Changizi，她的教学并不拘泥于理论，而是紧扣“实际开发中会碰到什么、用什么、做什么”来设计课程，Git 和 GitHub 自然也成了教学的一部分：以 GitHub flow 方法为原型，每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。尤其在期末项目中，GitHub 几乎成了我们小组的“办公室” —— 我们在那里讨论、同步进度、review 对方的代码、解决 merge conflict，每天都在上面高频协作。">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-20T20:30:09-08:00">
+    <meta property="article:modified_time" content="2025-01-20T20:30:09-08:00">
+
+
+  <meta itemprop="name" content="基于 Github Flow 的 Git 总体工作流程">
+  <meta itemprop="description" content="Why Git? Git/Github是开发者最高频使用的工具/平台，无论开发什么，只要涉及多人协作，git 就是默认的“公共语言”，有时即使一个人独自开发，git 也依然是最可靠的版本控制方案甚至极简部署工具。
+项目一旦用上 git，相当于一个人掌握了某种超能力，可以随时给世界打点（commit），根据打点让时光倒流（版本控制），还可以看到世界是怎么被不同人影响的（查看每一次改动的作者与原因），剔除出对这个世界不好的影响因素（找出导致 bug 的代码），保证主世界线收束（审查 PR、保护主分支）。
+What a superpower!
+想掌握这种控制时间、协作与秩序超能力吗？从这篇文章迈出第一步吧！
+我为什么写一篇介绍 git 的文章？ 在 MIT的The Missing Semester of Your CS Education 中就有一章专门讲 Version Control (Git)，反映了一个现实问题：Git 是开发中不可或缺的工具，但却往往是计算机教育中被忽略的“空白地带”，很多 CS 学生直到进入职场，才在手忙脚乱中被迫补上这一课。不过我作为一个幸运的 CS 学生，在 Northeastern 的 CS5520 Mobile App Development 课程里碰到一位很 practical 的老师 —— Neda Changizi，她的教学并不拘泥于理论，而是紧扣“实际开发中会碰到什么、用什么、做什么”来设计课程，Git 和 GitHub 自然也成了教学的一部分：以 GitHub flow 方法为原型，每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。尤其在期末项目中，GitHub 几乎成了我们小组的“办公室” —— 我们在那里讨论、同步进度、review 对方的代码、解决 merge conflict，每天都在上面高频协作。">
+  <meta itemprop="datePublished" content="2025-01-20T20:30:09-08:00">
+  <meta itemprop="dateModified" content="2025-01-20T20:30:09-08:00">
+  <meta itemprop="wordCount" content="888">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="基于 Github Flow 的 Git 总体工作流程">
+  <meta name="twitter:description" content="Why Git? Git/Github是开发者最高频使用的工具/平台，无论开发什么，只要涉及多人协作，git 就是默认的“公共语言”，有时即使一个人独自开发，git 也依然是最可靠的版本控制方案甚至极简部署工具。
+项目一旦用上 git，相当于一个人掌握了某种超能力，可以随时给世界打点（commit），根据打点让时光倒流（版本控制），还可以看到世界是怎么被不同人影响的（查看每一次改动的作者与原因），剔除出对这个世界不好的影响因素（找出导致 bug 的代码），保证主世界线收束（审查 PR、保护主分支）。
+What a superpower!
+想掌握这种控制时间、协作与秩序超能力吗？从这篇文章迈出第一步吧！
+我为什么写一篇介绍 git 的文章？ 在 MIT的The Missing Semester of Your CS Education 中就有一章专门讲 Version Control (Git)，反映了一个现实问题：Git 是开发中不可或缺的工具，但却往往是计算机教育中被忽略的“空白地带”，很多 CS 学生直到进入职场，才在手忙脚乱中被迫补上这一课。不过我作为一个幸运的 CS 学生，在 Northeastern 的 CS5520 Mobile App Development 课程里碰到一位很 practical 的老师 —— Neda Changizi，她的教学并不拘泥于理论，而是紧扣“实际开发中会碰到什么、用什么、做什么”来设计课程，Git 和 GitHub 自然也成了教学的一部分：以 GitHub flow 方法为原型，每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。尤其在期末项目中，GitHub 几乎成了我们小组的“办公室” —— 我们在那里讨论、同步进度、review 对方的代码、解决 merge conflict，每天都在上面高频协作。">
+
+<link rel="canonical" href="http://localhost:1313/posts/git-workflow.zh/" />
+
+    <link rel="stylesheet" href="/css/index.css" />
+
+
+      <script src="/js/main.js" defer></script>
+  
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@id": "http://localhost:1313/posts/git-workflow.zh/",
+  "@type": "BlogPosting",
+  "copyrightNotice": "Gian Xu",
+  "datePublished": "2025-01-20",
+  "description": " Why Git? Git/Github是开发者最高频使用的工具/平台，无论开发什么，只要涉及多人协作，git 就是默认的“公共语言”，有时即使一个人独自开发，git 也依然是最可靠的版本控制方案甚至极简部署工具。\n项目一旦用上 git，相当于一个人掌握了某种超能力，可以随时给世界打点（commit），根据打点让时光倒流（版本控制），还可以看到世界是怎么被不同人影响的（查看每一次改动的作者与原因），剔除出对这个世界不好的影响因素（找出导致 bug 的代码），保证主世界线收束（审查 PR、保护主分支）。\nWhat a superpower!\n想掌握这种控制时间、协作与秩序超能力吗？从这篇文章迈出第一步吧！\n我为什么写一篇介绍 git 的文章？ 在 MIT的The Missing Semester of Your CS Education 中就有一章专门讲 Version Control (Git)，反映了一个现实问题：Git 是开发中不可或缺的工具，但却往往是计算机教育中被忽略的“空白地带”，很多 CS 学生直到进入职场，才在手忙脚乱中被迫补上这一课。不过我作为一个幸运的 CS 学生，在 Northeastern 的 CS5520 Mobile App Development 课程里碰到一位很 practical 的老师 —— Neda Changizi，她的教学并不拘泥于理论，而是紧扣“实际开发中会碰到什么、用什么、做什么”来设计课程，Git 和 GitHub 自然也成了教学的一部分：以 GitHub flow 方法为原型，每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。尤其在期末项目中，GitHub 几乎成了我们小组的“办公室” —— 我们在那里讨论、同步进度、review 对方的代码、解决 merge conflict，每天都在上面高频协作。",
+  "headline": "基于 Github Flow 的 Git 总体工作流程",
+  "isPartOf": {
+    "@id": "http://localhost:1313/posts/",
+    "@type": "Blog",
+    "name": "Posts"
+  },
+  "mainEntityOfPage": "http://localhost:1313/posts/git-workflow.zh/",
+  "name": "基于 Github Flow 的 Git 总体工作流程",
+  "timeRequired": "PT5M",
+  "url": "http://localhost:1313/posts/git-workflow.zh/",
+  "wordCount": 888
+}
+</script>
+
+
+  </head>
+  <body>
+    <div class="container mx-auto flex max-w-prose flex-col space-y-10 p-4 md:p-6">
+      <header class="flex flex-row items-center justify-between">
+        <div>
+  <a id="skip-nav" class="sr-only" href="#maincontent">Skip to main content</a>
+  <a class="font-semibold" href="/">Home Page</a>
+</div>
+
+  <nav>
+    <ul class="flex flex-row items-center justify-end space-x-4">
+    <li>
+      <a>Notes</a
+      >
+    </li>
+    <li>
+      <a aria-current="true" class="ancestor" href="/posts/">Posts</a
+      >
+    </li>
+    </ul>
+  </nav>
+
+
+      </header>
+      <main class="prose prose-slate relative md:prose-lg prose-h1:text-[2em]" id="maincontent">
+        <article class="main">
+    <header>
+      <h1 class="!mb-1">基于 Github Flow 的 Git 总体工作流程</h1><div class="flex flex-row items-center space-x-4">
+          <time class="text-sm italic opacity-80" datetime="2025-01-20T20:30:09-08:00"
+            >January 20, 2025</time
+          >
+        </div>
+    </header>
+
+    <h3 id="why-git" class="scroll-mt-8 group">
+  Why Git?
+  
+    <a href="#why-git"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h3>
+<p>Git/Github是开发者最高频使用的工具/平台，无论开发什么，只要涉及多人协作，git 就是默认的“公共语言”，有时即使一个人独自开发，git 也依然是最可靠的版本控制方案甚至极简部署工具。</p>
+<p>项目一旦用上 git，相当于一个人掌握了某种超能力，可以随时给世界打点（commit），根据打点让时光倒流（版本控制），还可以看到世界是怎么被不同人影响的（查看每一次改动的作者与原因），剔除出对这个世界不好的影响因素（找出导致 bug 的代码），保证主世界线收束（审查 PR、保护主分支）。</p>
+<p>What a superpower!</p>
+<p>想掌握这种控制时间、协作与秩序超能力吗？从这篇文章迈出第一步吧！</p>
+<h4 id="我为什么写一篇介绍-git-的文章" class="scroll-mt-8 group">
+  我为什么写一篇介绍 git 的文章？
+  
+    <a href="#%e6%88%91%e4%b8%ba%e4%bb%80%e4%b9%88%e5%86%99%e4%b8%80%e7%af%87%e4%bb%8b%e7%bb%8d-git-%e7%9a%84%e6%96%87%e7%ab%a0"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h4>
+<p>在 <a href="https://missing.csail.mit.edu/">MIT的The Missing Semester of Your CS Education</a> 中就有一章专门讲 <a href="https://missing.csail.mit.edu/2020/version-control/">Version Control (Git)</a>，反映了一个现实问题：Git 是开发中不可或缺的工具，但却往往是计算机教育中被忽略的“空白地带”，很多 CS 学生直到进入职场，才在手忙脚乱中被迫补上这一课。不过我作为一个幸运的 CS 学生，在 Northeastern 的 CS5520 Mobile App Development 课程里碰到一位很 practical 的老师 —— <a href="https://www.linkedin.com/in/nedachangizi/">Neda Changizi</a>，她的教学并不拘泥于理论，而是紧扣“实际开发中会碰到什么、用什么、做什么”来设计课程，Git 和 GitHub 自然也成了教学的一部分：<strong>以 <a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub flow</a> 方法为原型</strong>，每次写作业都要新建 branch，然后经历一系列 add, commit, push, pull request, merge, checkout main, pull。尤其在期末项目中，GitHub 几乎成了我们小组的“办公室” —— 我们在那里讨论、同步进度、review 对方的代码、解决 merge conflict，每天都在上面高频协作。</p>
+<p><img src="https://picture-guan.oss-cn-hangzhou.aliyuncs.com/20250502154844.png" alt="Github Flow与其他 Github 常见工作流的区别"></p>
+<p>虽然我在这之前也接触过 GitHub，自学过一些命令和原理，也写过一些 side projects，但这是我第一次在<strong>真实的多人开发中，从头到尾、系统而规范地使用 Git</strong>。这一过程也让我真正体会到版本控制不仅是工具，更是一种思维方式：它帮助我们记录、协作、追踪、理解整个项目的演进轨迹。现在回头看，我能明显感觉到自己在开发习惯上的成熟 —— 不再是临时查命令、随手操作，而是建立起了“Git-first”的工作流程意识。</p>
+<p>我当时也已经习惯用卡片笔记法（zettelkasten）整理我在 CS 中学习到的概念和方法，关于 git 的这一张卡片一直是我最常打开 check 的一张。后来另一门课也有一个 team project，其中一个队友不太熟悉 Git，我干脆把那张卡片导出成 PDF 发给了她作为“入门手册”。</p>
+<p>所以当我决定搭建一个 tech blog 时，脑海里浮现的第一篇文章就是这篇：<strong>基于 Github Flow 的 Git 总体工作流程</strong>。</p>
+<p>为了cover整体的同时避免冗长的篇幅，这篇笔记不会介绍 Git 的基础知识原理，也不会手把手教学，它更像一张实际开发中的 cheat sheet，<strong>总结了我作为一个已经掌握 GitHub 基本操作的开发者，在日常项目协作中遵循的一套标准流程和反复用到的命令。</strong> 也就是说我不会截图教你如何在GitHub里创建账号和repository，也不会提醒你要先cd进入某个文件夹再git clone，如果你看不懂其中的一步或者运行后报错，我鼓励你把整篇文章复制粘贴给GPT并且指出你不懂的那一步。</p>
+<p>如果你已经：</p>
+<ul>
+<li>有 Github 账号</li>
+<li>懂得怎么建立 repository</li>
+<li>已经在 shell 里以 ssh 连接了 GitHub 账号</li>
+<li>已经用 GitHub 进行过一些 add, commit, push 的操作</li>
+</ul>
+<p>但仍然对实际开发中的 GitHub 使用流程感到模糊 —— this article is written for you!</p>
+<h3 id="lets-git" class="scroll-mt-8 group">
+  Let&rsquo;s Git
+  
+    <a href="#lets-git"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h3>
+<p>我会先列出总体的流程，其中包含 6 个大的阶段，然后再分章具体解释每一个大阶段内部应该做什么。</p>
+<h4 id="总体流程" class="scroll-mt-8 group">
+  总体流程
+  
+    <a href="#%e6%80%bb%e4%bd%93%e6%b5%81%e7%a8%8b"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h4>
+<ol>
+<li><a href="#%E5%88%9B%E5%BB%BA-repository-%E5%B9%B6%E4%B8%94%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0%E5%92%8C%E8%BF%9C%E7%A8%8B">创建并且链接本地文件夹和远程的仓库</a></li>
+<li>保证本地和远程的文件同步一致
+<ul>
+<li>如果远程是最新的，<a href="#pull">Pull</a> 远程的内容到本地</li>
+<li>如果本地是最新的，ACP，见<a href="#%E4%BF%9D%E5%AD%98%E4%BF%AE%E6%94%B9%E5%92%8C%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B-develop-and-add-commit-push">保存修改和推送到远程</a></li>
+</ul>
+</li>
+<li>创建并切换到新分支，在新分支上开发，见<a href="#%E7%AE%A1%E7%90%86-branch">管理 Branch</a></li>
+<li>保存更新，并且把本地代码推送到远程，见<a href="#%E4%BF%9D%E5%AD%98%E4%BF%AE%E6%94%B9%E5%92%8C%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B-develop-and-add-commit-push">保存修改和推送到远程</a></li>
+<li>把远程的分支代码和代码合并，见 <a href="#pull-request-and-merge">Pull Request and Merge</a></li>
+<li>在本地切换回主分支，拉取最新代码 <a href="#pull">Pull</a></li>
+<li>继续回到第三步</li>
+</ol>
+<p><img src="https://picture-guan.oss-cn-hangzhou.aliyuncs.com/Blank%20diagram%20Lucidchart.png" alt="Four Areas of Git"></p>
+<h4 id="创建-repository-并且连接本地和远程" class="scroll-mt-8 group">
+  创建 Repository 并且连接本地和远程
+  
+    <a href="#%e5%88%9b%e5%bb%ba-repository-%e5%b9%b6%e4%b8%94%e8%bf%9e%e6%8e%a5%e6%9c%ac%e5%9c%b0%e5%92%8c%e8%bf%9c%e7%a8%8b"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h4>
+<p>第一步当然是创建repository，我们有远程和本地两个repository，而且初始化时要保证两者的一致和连接。</p>
+<p>按照习惯，你可以选择：先创建远程repository 或者 先创建本地repository。</p>
+<h5 id="方法-1在远程创建-repository然后-clone-到本地" class="scroll-mt-8 group">
+  方法 1：在远程创建 repository，然后 clone 到本地
+  
+    <a href="#%e6%96%b9%e6%b3%95-1%e5%9c%a8%e8%bf%9c%e7%a8%8b%e5%88%9b%e5%bb%ba-repository%e7%84%b6%e5%90%8e-clone-%e5%88%b0%e6%9c%ac%e5%9c%b0"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h5>
+<ol>
+<li>在 GitHub 上创建 Repository</li>
+<li>进入想要的目标文件夹，将远程 repository clone 到本地
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-01">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-01 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-01"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone &lt;repository-url&gt;</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+</ol>
+<h5 id="方法-2在本地创建项目文件夹在远程创建-repository然后把两者连接起来" class="scroll-mt-8 group">
+  方法 2：在本地创建项目文件夹，在远程创建 repository，然后把两者连接起来
+  
+    <a href="#%e6%96%b9%e6%b3%95-2%e5%9c%a8%e6%9c%ac%e5%9c%b0%e5%88%9b%e5%bb%ba%e9%a1%b9%e7%9b%ae%e6%96%87%e4%bb%b6%e5%a4%b9%e5%9c%a8%e8%bf%9c%e7%a8%8b%e5%88%9b%e5%bb%ba-repository%e7%84%b6%e5%90%8e%e6%8a%8a%e4%b8%a4%e8%80%85%e8%bf%9e%e6%8e%a5%e8%b5%b7%e6%9d%a5"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h5>
+<ol>
+<li>
+<p>在本地创建项目文件夹，然后初始化 git</p>
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-02">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-02 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-02"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git init</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>
+<p>在 GitHub 上创建 Repository</p>
+</li>
+<li>
+<p>把两者关联起来<br>
+进入文件夹，输入：</p>
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-03">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-03 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-03"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git remote add origin &lt;repository-url&gt;</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>
+<p>把本地的修改提交到远程（不要忘记这一步）：</p>
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-04">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-04 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-04"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git init
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Initial commit&#34;</span></span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+</ol>
+<p>git push -u origin main
+```</p>
+<h4 id="管理-branch" class="scroll-mt-8 group">
+  管理 Branch
+  
+    <a href="#%e7%ae%a1%e7%90%86-branch"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h4>
+<blockquote>
+<p>[!success]  Good Practic in Github Flow: 为新开发创建新 branch
+Main 是我们的主分支，每一次新开发，你都应该创建一个和开发相关的新分支，而不是直接在主分支上开发</p>
+</blockquote>
+<ul>
+<li>
+<p>查看分支 (Read)</p>
+<ul>
+<li>查看包括目前所有 branches 的 list：
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-05">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-05 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-05"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>切换到一个具体的 branch 查看该 branch 下的代码：
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-06">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-06 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-06"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout &lt;name&gt;</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>如果你不喜欢命令行操作，你也可以在 VScode 里看到分支的图形界面：<code>shift+command+p</code>，输入 git check 然后选择：<code>Git: Checkout to...</code></li>
+</ul>
+</li>
+<li>
+<p>新分支 (Create)</p>
+<ul>
+<li>创建 new branch：
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-07">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-07 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-07"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch &lt;name&gt;</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>快捷合并：创建分支并切换到该分支
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-08">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-08 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-08"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout -b &lt;name&gt;</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+等价于：
+<code>git branch &lt;name&gt;; git checkout &lt;name&gt;</code></li>
+</ul>
+</li>
+<li>
+<p>删除 (Delete)</p>
+<ul>
+<li>删除本地分支：
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-09">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-09 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-09"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -D &lt;name&gt;</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>同时删除本地和远程分支：
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-10">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-10 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-10"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -d feature-branch <span style="color:#f92672">&amp;&amp;</span> git push origin --delete feature-branch</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>自动删除所有已 merge 的本地和远程分支：
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-11">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-11 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-11"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch --merged main | grep -v <span style="color:#e6db74">&#34;main&#34;</span> | xargs -I <span style="color:#f92672">{}</span> git push origin --delete <span style="color:#f92672">{}</span></span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+</ul>
+</li>
+<li>
+<p>合并 (Merge)</p>
+<ul>
+<li>将现在所在的分支，合并到目标分支：
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-12">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-12 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-12"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge &lt;target-branch-name&gt;</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>目前我们有四个地方：</p>
+<ol>
+<li>本地主分支：<code>main</code></li>
+<li>远程主分支：<code>origin/main</code></li>
+<li>本地特定分支：<code>&lt;your-branch-name&gt;</code></li>
+<li>远程特定分支：<code>&lt;origin/your-branch-name&gt;</code></li>
+</ol>
+<p>你现在在 <strong>本地特定分支</strong>，和此分支相关的开发都要在这个分支上开发。</p>
+<h4 id="保存修改和推送到远程-develop-and-add-commit-push" class="scroll-mt-8 group">
+  保存修改和推送到远程 (Develop and Add, commit, push)
+  
+    <a href="#%e4%bf%9d%e5%ad%98%e4%bf%ae%e6%94%b9%e5%92%8c%e6%8e%a8%e9%80%81%e5%88%b0%e8%bf%9c%e7%a8%8b-develop-and-add-commit-push"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h4>
+<p>目的：将 本地特定分支 的内容推送到 远程特定分支。</p>
+<ul>
+<li>Add：只要你进行了修改，可以随时 add，将修改添加到暂存区。不过如果你懒得 add 太多，也可以在 commit 前只 add 一次。
+<ul>
+<li>你可以只 add 一个文件：<code>git add &lt;file-name&gt;</code></li>
+<li>你也可以 add 所有的修改： <code>git add .</code></li>
+</ul>
+</li>
+<li>当你完成了一系列修改，完成了一个主要的目标或者功能，并且想把它记录下来的时候，进行一次 commit，记录这次更新以便查阅和回退。
+<ul>
+<li><code>git commit -m &quot;Add feature X&quot;</code> （m=message，短暂描述这次修改了什么的信息）</li>
+<li><code>git commit</code> 可以进入编辑器详细描述。</li>
+<li>[[Git commit的书写规范]]</li>
+</ul>
+</li>
+<li>当你进行了一系列 commit，而且希望同步到远程仓库让你的其他队友能看见时，进行一次 push，把本地修改同步到远程仓库。
+<ul>
+<li>第一次推送一个新分支：<code>git push -u origin &lt;branch-name&gt;</code></li>
+<li>推送到当前 branch 的远程仓库：<code>git push</code></li>
+<li>推送到指定 branch：`git push origin <!-- raw HTML omitted -->``</li>
+</ul>
+</li>
+</ul>
+<h4 id="pull-request-and-merge" class="scroll-mt-8 group">
+  Pull Request and Merge
+  
+    <a href="#pull-request-and-merge"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h4>
+<p>目的：将 远程特定分支 的内容合并到 远程主分支。</p>
+<ul>
+<li>
+<p>进入 GitHub Repository 主页，会弹出新的 branch pushes 让你“Compare &amp; pull request”，或者进入 Pull requests tab 手动填写一个 Pull request</p>
+<ul>
+<li>base: main ← compare: xxx，即对比这两个，没问题的话把 xxx 合并入 main</li>
+<li>填写 title 和 description</li>
+<li>点击 <strong>Create pull request</strong></li>
+</ul>
+</li>
+<li>
+<p>在新的 pull request 界面里，可以</p>
+<ul>
+<li>指派 reviewer</li>
+<li>关联 issue（可选）</li>
+<li>评论和讨论</li>
+<li>根据反馈解决问题/conflicts，继续 ACP，新的更新会自动同步到这次 Pull Request</li>
+<li>没有问题之后，点击 <strong>Merge pull request</strong>，代码就会被合并到主分支</li>
+</ul>
+</li>
+</ul>
+<h4 id="pull" class="scroll-mt-8 group">
+  Pull
+  
+    <a href="#pull"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h4>
+<p>目的：将 远程主分支 的内容拉取到 本地主分支。</p>
+<ul>
+<li>在本地，从特定分支切换回主分支 <code>git checkout main</code></li>
+<li>在本地主分支上运行 pull 将远程内容拉取到本地：<code>git pull</code></li>
+</ul>
+<h3 id="进阶" class="scroll-mt-8 group">
+  进阶
+  
+    <a href="#%e8%bf%9b%e9%98%b6"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h3>
+<p>几个月前</p>
+<p>一个月前掌握了add, commit, pull, push, checkout branch, merge 的我：我已经彻底掌握了git，我就是团队合作、版本控制的天才，我要写一篇技术博客专门教大家怎么用GitHub</p>
+<p>现在：log, HEAD, diff, fetch, checkout, reset, rebase, reflog, stash, cherry-pick：我什么都不是，什么都不懂，感谢gpt保姆大恩大德，git求求你不要让我丢掉或者搞乱我想要的代码就行555555</p>
+<h2 id="材料" class="scroll-mt-8 group">
+  材料
+  
+    <a href="#%e6%9d%90%e6%96%99"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h2>
+<p>就是说：噢，我发现我需要用到 git → 让我来看看怎么用，<strong>直接上手</strong> → 我会用了！git 真的很有用 → 但是我其实不知道我每天在用的这些命令，让我来整体学习一下 git 建立知识框架
+而不是：噢，github 似乎是 tech 领域绕不开的工具，我来学习一下 → 学了一堆概念但不知道到底有什么用 → 我都不知道我为啥要学这些，为什么还要学呢，算了还是不学了 → 开发项目的时候为了省事也因为无知，不会想到要用好用的 git</p>
+<p>这篇文章要达到的效果就是：能让人直接上手 GitHub</p>
+<p>虽然不会介绍</p>
+<h3 id="参考链接" class="scroll-mt-8 group">
+  参考链接
+  
+    <a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h3>
+<p><a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub flow - GitHub Docs</a></p>
+<p>Your original message in English:</p>
+<blockquote>
+<h4 id="manage-branches" class="scroll-mt-8 group">
+  Manage Branches
+  
+    <a href="#manage-branches"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h4>
+<blockquote>
+<p>✅ Good Practice in GitHub Flow: Always create a new branch for new development
+<code>main</code> is our main branch. For each new feature or change, you should create a relevant new branch instead of working directly on <code>main</code>.</p>
+</blockquote>
+<ul>
+<li>
+<p><code>git merge &lt;revision&gt;</code>: merges the given revision into the current branch</p>
+</li>
+<li>
+<p><strong>View branches</strong></p>
+<ul>
+<li>
+<p>List all local branches: <code>git branch</code></p>
+</li>
+<li>
+<p>Switch to a specific branch to view code: <code>git checkout &lt;name&gt;</code></p>
+<ul>
+<li>You can also see branches graphically in the IDE: press <code>shift+command+p</code>, type <code>git check</code>, and choose <code>Git: Checkout to...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Create branches</strong></p>
+<ul>
+<li>Create a new branch: <code>git branch &lt;name&gt;</code></li>
+<li>Quick switch and create: <code>git checkout -b &lt;name&gt;</code> (same as <code>git branch &lt;name&gt;; git checkout &lt;name&gt;</code>)</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete branches</strong></p>
+<ul>
+<li>
+<p>Delete local branch: <code>git branch -D &lt;name&gt;</code></p>
+</li>
+<li>
+<p>Delete local and remote: <code>git branch -d feature-branch &amp;&amp; git push origin --delete feature-branch</code></p>
+</li>
+<li>
+<p>Auto-delete all merged branches (except <code>main</code>):</p>
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-13">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-13 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-13"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch --merged main | grep -v <span style="color:#e6db74">&#34;main&#34;</span> | xargs -I <span style="color:#f92672">{}</span> git push origin --delete <span style="color:#f92672">{}</span>  </span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+</ul>
+</li>
+<li>
+<h3 id="merge" class="scroll-mt-8 group">
+  <strong>Merge</strong>
+  
+    <a href="#merge"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h3>
+</li>
+</ul>
+</blockquote>
+<hr>
+<p>你问 “合并 有什么相关操作”，我来帮你补全 merge 相关常用指令：</p>
+<h4 id="-合并merge" class="scroll-mt-8 group">
+  🧩 合并（Merge）
+  
+    <a href="#-%e5%90%88%e5%b9%b6merge"
+        class="no-underline hidden opacity-50 hover:opacity-100 !text-inherit group-hover:inline-block"
+        aria-hidden="true" title="Link to this heading" tabindex="-1">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+    </a>
+  
+</h4>
+<ul>
+<li>
+<p><strong>将某个分支合并到当前分支</strong></p>
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-14">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-14 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-14"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge &lt;branch-name&gt;</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+<blockquote>
+<p>例如你在 <code>main</code> 上，执行 <code>git merge feature/login</code> 就会把 <code>feature/login</code> 的修改合并到 <code>main</code>。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>解决冲突</strong>
+如果 merge 时出现冲突（conflict），你需要手动修改冲突文件，然后：</p>
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-15">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-15 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-15"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>
+<p><strong>查看 merge 状态</strong></p>
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-16">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-16 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-16"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>
+<p><strong>放弃 merge 操作（如果后悔了）</strong></p>
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-17">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-17 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-17"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge --abort</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+</li>
+<li>
+<p><strong>禁用 fast-forward（保留分支信息）</strong></p>
+<figure class="codeblock not-prose relative scroll-mt-8" id="codeblock-18">
+  <aside
+    class="absolute right-0 top-0 hidden rounded-bl-sm rounded-tr-sm bg-white/10 px-2 py-1 text-white/70 transition-opacity md:inline-block"
+  >
+    <div class="codeblock-meta flex max-w-xs flex-row items-center space-x-3">
+      <div class="small-caps shrink cursor-default truncate font-mono text-xs" aria-hidden="true">
+        <span class="relative">bash</span>
+      </div>
+      <div>
+        <clipboard-copy
+          type="button"
+          aria-label="Copy code to clipboard"
+          title="Copy code to clipboard"
+          class="block cursor-pointer transition-colors hover:text-sky-400"
+          target="#codeblock-18 code"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="lucide lucide-clipboard h-4 w-4"
+  viewBox="0 0 24 24"
+>
+  <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+</svg>
+
+        </clipboard-copy>
+      </div>
+      <div>
+        <a
+          href="#codeblock-18"
+          class="block"
+          aria-label="Link to this code block"
+          title="Link to this code block"
+        >
+          <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-link w-4 h-4 block"
+  viewBox="0 0 24 24"
+>
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+</svg>
+
+        </a>
+      </div>
+    </div>
+  </aside>
+  <p class="sr-only">bash code snippet start</p>
+  <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge --no-ff &lt;branch-name&gt;</span></span></code></pre></div>
+  <p class="sr-only">bash code snippet end</p>
+
+  
+</figure>
+<blockquote>
+<p>用于保留 merge commit 记录，更清晰看到谁 merge 了什么。</p>
+</blockquote>
+</li>
+</ul>
+<p>你现在是在写项目笔记吗？需要我帮你整理成更完整的文档结构或 Obsidian 格式吗？</p>
+
+  </article>
+    <aside class="not-prose flex flex-col space-y-8 border-t pt-6">
+    <section class="flex flex-col space-y-4" aria-hidden="true">
+      <h2 class="flex flex-row items-center space-x-2 text-lg font-semibold">
+        <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  class="lucide lucide-chart-network h-4 w-4"
+  viewBox="0 0 24 24"
+  aria-hidden="true"
+>
+  <path
+    d="m13.11 7.664 1.78 2.672M14.162 12.788l-3.324 1.424M20 4l-6.06 1.515M3 3v16a2 2 0 0 0 2 2h16"
+  />
+  <circle cx="12" cy="6" r="2" />
+  <circle cx="16" cy="12" r="2" />
+  <circle cx="9" cy="15" r="2" />
+</svg>
+
+        <span>Graph</span>
+      </h2>
+
+      <content-network-graph
+  class="h-64 ml-6"
+  data-endpoint="/graph/index.json"
+  page="/posts/git-workflow.zh/"
+></content-network-graph>
+
+    </section>
+</aside>
+
+
+      </main>
+      <footer class="mt-20 border-t border-neutral-100 pt-2 text-xs">
+        <section class="items-top flex flex-row justify-between opacity-70">
+  <div class="flex flex-col space-y-2">
+      <p>Copyright &copy; 2025, Gian Xu.</p>
+
+  </div>
+    <div>
+      <a
+        href="https://github.com/michenriksen/hugo-theme-til"
+        title="Today I Learned &#8212; A Hugo theme by Michael Henriksen"
+        data-theme-version="0.6.0"
+        >theme: til</a
+      >
+    </div>
+</section>
+
+      </footer>
+    </div>
+    
+  </body>
+</html>
