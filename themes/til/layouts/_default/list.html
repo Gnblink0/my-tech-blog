@@ -1,7 +1,11 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
 
-  {{ .Content }}
+  {{ .RenderString
+    (replaceRE `\\(\[[[^]]*]])` `$1` (
+    replaceRE `(^|[^\\]{1})(?:(\[\[([^]||]*)]])|(\[\[([^]||]*)\|([^]]*)]]))` `$1[$3$6](internalwiki "$3$5")` .RawContent)
+    )
+  }}
   {{ range .Pages }}
     <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
     {{ .Summary }}

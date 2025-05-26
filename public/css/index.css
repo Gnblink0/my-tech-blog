@@ -2313,8 +2313,9 @@ footer a:hover {
   width: 100%;
 }
 
+/* Custom */
 .max-w-prose {
-  max-width: 65ch;
+  max-width: 80ch;
 }
 
 .max-w-xs {

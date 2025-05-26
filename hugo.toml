@@ -3,3 +3,10 @@ languageCode = 'en-us'
 title = "Home Page"
 copyright = 'Gian Xu'
 theme = "til"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+
