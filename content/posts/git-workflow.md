@@ -49,9 +49,7 @@ But still feel unclear about the GitHub workflow in actual development - this ar
 I will first outline the overall process, which contains 6 major stages, and then explain in detail what should be done within each major stage.
 
 ### Overall Process
-
-<!--custom-toc-start-->
-1. [Create and connect local folder with remote repository](#creating-and-connecting-repository
+1. [Create and connect local folder with remote repository](#creating-and-connecting-repository)
 2. Ensure local and remote files are in sync
    - If remote is newer, [Pull](#pull) remote content to local
    - If local is newer, ACP, see [Save changes and push to remote](#saving-changes-and-pushing-to-remote-develop-and-add-commit-push)
@@ -61,7 +59,6 @@ I will first outline the overall process, which contains 6 major stages, and the
 6. Switch back to main branch locally, pull latest code [Pull](#pull)
 7. Return to step 3
 
-<!--custom-toc-end-->
 
 ### Creating and Connecting Repository
 
