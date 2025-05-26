@@ -1,15 +1,15 @@
 {
   "graph": {
-    "/posts/git-workflow.zh/": {
+    "/posts/git-workflow/": {
       "in": [],
       "out": []
     }
   },
   "pages": {
-    "/posts/git-workflow.zh/": {
-      "permalink": "/posts/git-workflow.zh/",
+    "/posts/git-workflow/": {
+      "permalink": "/posts/git-workflow/",
       "section": "posts",
-      "title": "基于 Github Flow 的 Git 总体工作流程"
+      "title": "A Practical Git Workflow Based on GitHub Flow"
     }
   }
 }
