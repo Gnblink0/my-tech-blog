@@ -26,7 +26,7 @@
   <meta itemprop="description" content="Why Git? Git/GitHub is the most frequently used tool/platform by developers. Regardless of what you’re developing, as long as it involves collaboration, Git is the default “common language”. Even when developing alone, Git remains the most reliable version control solution and even a minimalist deployment tool.">
   <meta itemprop="datePublished" content="2025-05-01T20:30:09-08:00">
   <meta itemprop="dateModified" content="2025-05-01T20:30:09-08:00">
-  <meta itemprop="wordCount" content="2044">
+  <meta itemprop="wordCount" content="1938">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="A Practical Git Workflow Based on GitHub Flow">
@@ -58,7 +58,7 @@
   "name": "A Practical Git Workflow Based on GitHub Flow",
   "timeRequired": "PT10M",
   "url": "http://localhost:1313/posts/git-workflow/",
-  "wordCount": 2044
+  "wordCount": 1938
 }
 </script>
 
@@ -152,42 +152,6 @@
   
 </h3>
 <p>In <a href="https://missing.csail.mit.edu/">MIT&rsquo;s The Missing Semester of Your CS Education</a>, there&rsquo;s a chapter specifically about <a href="https://missing.csail.mit.edu/2020/version-control/">Version Control (Git)</a>, reflecting a reality: Git is an indispensable tool in development, yet often a &ldquo;blind spot&rdquo; in computer science education. Many CS students don&rsquo;t learn it until they enter the workforce, where they have to frantically catch up. However, I was a fortunate CS student who encountered a very practical professor - <a href="https://www.linkedin.com/in/nedachangizi/">Neda Changizi</a> in Northeastern&rsquo;s CS5520 Mobile App Development course. Her teaching wasn&rsquo;t confined to theory but focused on &ldquo;what you&rsquo;ll encounter, use, and do in actual development&rdquo;. Git and GitHub naturally became part of the curriculum: <strong>Using <a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub flow</a> as a prototype</strong>, every homework assignment required creating a new branch, then going through a series of add, commit, push, pull request, merge, checkout main, pull. Especially in our final project, GitHub became our team&rsquo;s &ldquo;office&rdquo; - we discussed, synchronized progress, reviewed each other&rsquo;s code, and resolved merge conflicts there, collaborating intensively every day.</p>
-<table>
-  <thead>
-      <tr>
-          <th>Workflow Name</th>
-          <th>Main Branch Strategy</th>
-          <th>Key Features</th>
-          <th>Suitable Scenarios</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Centralized Workflow</td>
-          <td>Only main</td>
-          <td>All development directly on main branch, similar to SVN</td>
-          <td>Small teams or personal projects, suitable for Git beginners</td>
-      </tr>
-      <tr>
-          <td>Feature Branch Workflow (GitHub Flow)</td>
-          <td>main + feature branches</td>
-          <td>One branch per feature, requires Pull Request for merging</td>
-          <td>Multi-person collaboration, CI/CD, modern web projects</td>
-      </tr>
-      <tr>
-          <td>Git Flow</td>
-          <td>main + develop + feature/hotfix/release branches</td>
-          <td>Multiple branches, clear rules, suitable for projects with clear version iterations</td>
-          <td>Traditional software development with clear release cycles</td>
-      </tr>
-      <tr>
-          <td>Trunk-Based Development</td>
-          <td>Only main (or trunk)</td>
-          <td>Direct development on main branch, frequent merging, requires feature toggle</td>
-          <td>Large agile teams pursuing continuous deployment and rapid iteration</td>
-      </tr>
-  </tbody>
-</table>
 <p>Although I had previous exposure to GitHub, self-learned some commands and principles, and worked on some side projects, this was my first time <strong>systematically and standardly using Git in real multi-person development from start to finish</strong>. This process made me truly understand that version control is not just a tool, but a way of thinking: it helps us record, collaborate, track, and understand the entire project&rsquo;s evolution trajectory. Looking back now, I can clearly feel my maturity in development habits - no longer looking up commands temporarily or operating casually, but establishing a &ldquo;Git-first&rdquo; workflow mindset.</p>
 <p>I was also already accustomed to using the zettelkasten method to build my reusable code knowledge base, and this Git card was one of my most frequently checked ones. Later, in another course&rsquo;s team project, when one of my teammates wasn&rsquo;t familiar with Git, I simply exported that card as a PDF and sent it to her as a &ldquo;starter guide&rdquo;.</p>
 <p>So when I decided to build a tech blog, the first article that came to mind was this one: <strong>A Comprehensive Git Workflow Based on GitHub Flow</strong>.</p>
@@ -251,7 +215,6 @@
     </a>
   
 </h3>
-<!-- raw HTML omitted -->
 <ol>
 <li>[Create and connect local folder with remote repository](#creating-and-connecting-repository</li>
 <li>Ensure local and remote files are in sync
@@ -266,7 +229,6 @@
 <li>Switch back to main branch locally, pull latest code <a href="#pull">Pull</a></li>
 <li>Return to step 3</li>
 </ol>
-<!-- raw HTML omitted -->
 <h3 id="creating-and-connecting-repository" class="scroll-mt-8 group">
   Creating and Connecting Repository
   
