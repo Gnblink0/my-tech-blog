@@ -42,29 +42,15 @@ But still feel unclear about the GitHub workflow in actual development - this ar
 I will first outline the overall process, which contains 6 major stages, and then explain in detail what should be done within each major stage.
 
 ### Overall Process
-- [Why Git?](#why-git)
-  - [Why am I writing an article about Git?](#why-am-i-writing-an-article-about-git)
-- [Let's Git](#lets-git)
-  - [Overall Process](#overall-process)
-  - [Creating and Connecting Repository](#creating-and-connecting-repository)
-    - [Method 1: Create Repository Remotely and Clone Locally](#method-1-create-repository-remotely-and-clone-locally)
-    - [Method 2: Create Project Folder Locally, Create Repository Remotely, and Connect Them](#method-2-create-project-folder-locally-create-repository-remotely-and-connect-them)
-  - [Managing Branches](#managing-branches)
-    - [READ](#read)
-    - [CREATE](#create)
-    - [DELETE](#delete)
-    - [MERGE](#merge)
-    - [Current State](#current-state)
-  - [Saving Changes and Pushing to Remote (Develop and Add, Commit, Push)](#saving-changes-and-pushing-to-remote-develop-and-add-commit-push)
-    - [ADD](#add)
-    - [COMMIT](#commit)
-    - [PUSH](#push)
-    - [Common Operations](#common-operations)
-  - [Pull Request and Merge](#pull-request-and-merge)
-  - [Pull](#pull)
-- [Simplification and Advanced Topics](#simplification-and-advanced-topics)
-- [References](#references)
-
+1. [Create and connect local folder with remote repository](#creating-and-connecting-repository)
+2. Ensure local and remote files are in sync
+   - If remote is newer, [Pull](#pull) remote content to local
+   - If local is newer, ACP, see [Save changes and push to remote](#saving-changes-and-pushing-to-remote-develop-and-add-commit-push)
+3. Create and switch to new branch, develop on the new branch, see [Managing Branches](#managing-branches)
+4. Save updates and push local code to remote, see [Save changes and push to remote](#saving-changes-and-pushing-to-remote-develop-and-add-commit-push)
+5. Merge remote branch code, see [Pull Request and Merge](#pull-request-and-merge)
+6. Switch back to main branch locally, pull latest code [Pull](#pull)
+7. Return to step 3
 
 ### Creating and Connecting Repository
 
